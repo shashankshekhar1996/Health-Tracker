@@ -35,14 +35,11 @@ public class PulseData {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-           /* db.execSQL("CREATE TABLE" + DATABASE_TABLE + "(" +
+           db.execSQL("CREATE TABLE" + DATABASE_TABLE + "(" +
                     KEY_ROWID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     KEY_PULSERATE + " INTEGER NOT NULL " +
-                    KEY_TIMESTAMP + " DATETIME DEFAULT CURRENT_TIMESTAMP"
-
-
-
-            );*/
+                    KEY_TIMESTAMP + " DATETIME DEFAULT CURRENT_TIMESTAMP);"
+            );
         }
 
         @Override
