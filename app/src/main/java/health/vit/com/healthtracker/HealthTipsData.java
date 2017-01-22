@@ -9,36 +9,34 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Created by shashankshekhar on 22/01/17.
  */
 
-public class PulseData {
-
+public class HealthTipsData {
     private static final String KEY_ROWID = "_id";
-    private static final String KEY_PULSERATE = "PulseRate";
-    private static final String KEY_TIMESTAMP = "TimeStamp";
+    private static final String KEY_TIPS= "HealthTips";
+    //private static final String KEY_TIMESTAMP = "TimeStamp";
 
-    private static final String DATABASE_NAME = "PulseDatabase";
-    private static final String DATABASE_TABLE = "PulseTable";
+    private static final String DATABASE_NAME = "HealthTipsDb";
+    private static final String DATABASE_TABLE = "HelthTipsTable";
     private static final int DATABASE_VERSION = 1;
 
-    private DbHelper dbHelper;
+    private PulseData.DbHelper dbHelper1;
     private final Context context;
     private SQLiteDatabase database;
 
-    public class DbHelper extends SQLiteOpenHelper{
+    public class DbHelper1 extends SQLiteOpenHelper {
 
-        public DbHelper(Context context) {
+        public DbHelper1(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
         }
 
-        public DbHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version, DatabaseErrorHandler errorHandler) {
+        public DbHelper1(Context context, String name, SQLiteDatabase.CursorFactory factory, int version, DatabaseErrorHandler errorHandler) {
             super(context, name, factory, version, errorHandler);
         }
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-           db.execSQL("CREATE TABLE" + DATABASE_TABLE + "(" +
+            db.execSQL("CREATE TABLE" + DATABASE_TABLE + "(" +
                     KEY_ROWID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    KEY_PULSERATE + " INTEGER NOT NULL " +
-                    KEY_TIMESTAMP + " DATETIME DEFAULT CURRENT_TIMESTAMP);"
+                    KEY_TIPS + " TEXT NOT NULL);"
             );
         }
 
@@ -48,19 +46,20 @@ public class PulseData {
         }
     }
 
-    public PulseData(Context c){
+    public HealthTipsData(Context c){
         this.context = c;
 
     }
 
-    public PulseData open(){
-        dbHelper = new DbHelper(context);
-        database = dbHelper.getWritableDatabase();
+    public HealthTipsData open(){
+        dbHelper1 = new DbHelper1(context);
+        database = dbHelper1.getWritableDatabase();
         return this;
     }
 
     public void close(){
-        dbHelper.close();
+        dbHelper1.close();
     }
-    
+
+
 }

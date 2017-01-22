@@ -7,4 +7,6 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_reminder">Reminder</string>
     <string name="title_activity_pulse_data_view">PulseDataView</string>
+    <string name="title_activity_bluetooth_data">BluetoothData</string>
+    <string name="title_activity_health_tips">HealthTips</string>
 </resources>
