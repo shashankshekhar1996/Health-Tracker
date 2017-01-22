@@ -1,6 +1,5 @@
 package health.vit.com.healthtracker;
 
-import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -38,12 +37,9 @@ public class Reminder extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-
-            finish();
-            //finish(); // close this activity and return to preview activity (if there is any)
+            finish(); // close this activity and return to preview activity (if there is any)
         }
 
-        //Mark as read (esc)Mark as read
         return super.onOptionsItemSelected(item);
     }
 }

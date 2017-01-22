@@ -7,4 +7,10 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_reminder">Reminder</string>
     <string name="title_activity_pulse_data_view">PulseDataView</string>
+    <string name="title_activity_find_doctor">FindDoctorActivity</string>
+
+
+    <!-- Project-specific Strings like URLs, Names ,etc. -->
+
+    <string name="filter_doctor_url">http://socketchat.tk/sendjson.php</string>
 </resources>
