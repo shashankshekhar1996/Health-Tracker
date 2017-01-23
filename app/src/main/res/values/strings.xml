@@ -13,4 +13,5 @@
     <!-- Project-specific Strings like URLs, Names ,etc. -->
 
     <string name="filter_doctor_url">http://socketchat.tk/sendjson.php</string>
+    <string name="send_sms_doctor">Hello Doctor, I want to meet you regarding my health issues.</string>
 </resources>
