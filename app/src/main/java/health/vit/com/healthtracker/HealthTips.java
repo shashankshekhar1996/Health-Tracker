@@ -1,27 +1,53 @@
 package health.vit.com.healthtracker;
 
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import static health.vit.com.healthtracker.R.id.toolbar;
 
 public class HealthTips extends AppCompatActivity {
 
-    private String[] healthTipsHeading;
-    private String[] healthTipsPara;
+    private String[] healthTipsHeading = {};//getResources().getStringArray(R.array.heading); //{"Drink more Water today.","Drink more Water today.","Drink more Water today.","Drink more Water today."};
+    private String[] healthTipsPara = {}; //getResources().getStringArray(R.array.paras);//{"Drink more Water today.","Drink more Water today.","Drink more Water today.","Drink more Water today."};
+    ListView lv;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_health_tips);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        healthTipsHeading = getResources().getStringArray(R.array.heading);
+        healthTipsPara = getResources().getStringArray(R.array.paras);
+
+
+        lv = (ListView) findViewById(R.id.listView);
+        lv.setAdapter(new ArrayAdapter<>(HealthTips.this, android.R.layout.simple_list_item_1 , healthTipsHeading));
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String clicked = healthTipsHeading[position];
+                Intent intent = new Intent(HealthTips.this, HealthTipsInfo.class);
+                intent.putExtra("head", healthTipsHeading[position]);
+                intent.putExtra("para", healthTipsPara[position]);
+                startActivity(intent);
+            }
+        });
+        //setListAdapter(new ArrayAdapter<String>(HealthTips.this, android.R.layout.i , healthTipsHeading));
+
+       /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,26 +55,23 @@ public class HealthTips extends AppCompatActivity {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
-
-        healthTipsHeading = new String[30];
-        healthTipsPara = new String[30];
-
-        healthTipsHeading[0] = "Drink more Water today.";
-        healthTipsPara[0] = "Water is the most essential elements of life";
-
-        healthTipsHeading[0] = ""
+        });*/
 
 
 
 
 
     }
+    /*
 
-
-
-
-
-
-
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        String clicked = healthTipsHeading[position];
+        Intent intent = new Intent(this, HealthTipsInfo.class);
+        intent.putExtra("head", healthTipsHeading[position]);
+        intent.putExtra("para", healthTipsPara[position]);
+        startActivity(intent);
+        //startActivity(new Intent(HealthTips.this, HealthTipsData.class));
+    }*/
 }
