@@ -18,16 +18,12 @@ public class PulseData {
     private static final String DATABASE_NAME = "PulseDatabase";
     private static final String DATABASE_TABLE = "PulseTable";
     private static final int DATABASE_VERSION = 1;
-    private final Context context;
+
     private DbHelper dbHelper;
+    private final Context context;
     private SQLiteDatabase database;
 
-    public PulseData(Context c) {
-        this.context = c;
-
-    }
-
-    public class DbHelper extends SQLiteOpenHelper {
+    public class DbHelper extends SQLiteOpenHelper{
 
         public DbHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -39,7 +35,7 @@ public class PulseData {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            db.execSQL("CREATE TABLE" + DATABASE_TABLE + "(" +
+           db.execSQL("CREATE TABLE" + DATABASE_TABLE + "(" +
                     KEY_ROWID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     KEY_PULSERATE + " INTEGER NOT NULL " +
                     KEY_TIMESTAMP + " DATETIME DEFAULT CURRENT_TIMESTAMP);"
@@ -48,8 +44,23 @@ public class PulseData {
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+            db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE);
         }
     }
 
+    public PulseData(Context c){
+        this.context = c;
+
+    }
+
+    public PulseData open(){
+        dbHelper = new DbHelper(context);
+        database = dbHelper.getWritableDatabase();
+        return this;
+    }
+
+    public void close(){
+        dbHelper.close();
+    }
+    
 }
