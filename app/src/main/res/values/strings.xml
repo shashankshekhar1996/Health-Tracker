@@ -8,57 +8,10 @@
     <string name="title_activity_reminder">Reminder</string>
     <string name="title_activity_pulse_data_view">PulseDataView</string>
     <string name="title_activity_find_doctor">FindDoctorActivity</string>
-    <string name="title_health_tips">HealthTips</string>
+
 
     <!-- Project-specific Strings like URLs, Names ,etc. -->
 
     <string name="filter_doctor_url">http://socketchat.tk/sendjson.php</string>
-    <string name="title_activity_health_tips_info">HealthTipsInfo</string>
-
-
-    <string-array name="heading">
-        <item>Copy your kitty</item>
-        <item>Don\'t skip breakfast</item>
-        <item>Brush up on hygiene</item>
-        <item>Neurobics for your mind</item>
-        <item>Get what you give !</item>
-        <item>Bone up daily</item>
-        <item>Berries for your belly</item>
-        <item>Cut out herbs before ops</item>
-        <item>Eat your stress away</item>
-        <item>Pure water</item>
-        <item>The secret of stretching</item>
-        <item>Asthma-friendly sports</item>
-        <item>Eat healthy fats, NOT trans fats</item>
-        <item>Get enough sleep</item>
-        <item>Don\'t sit for too long at one time</item>
-    </string-array>
-
-
-    <string-array name="paras">
-        <item>Learn to do stretching exercises when you wake up. It boosts circulation and digestion, and eases back pain.</item>
-        <item>Studies show that eating a proper breakfast is one of the most positive things you can do if you are trying to lose weight. Breakfast skippers tend to gain weight. A balanced breakfast includes fresh fruit or fruit juice, a high-fibre breakfast cereal, low-fat milk or yoghurt, wholewheat toast, and a boiled egg.</item>
-        <item>Many people don\'t know how to brush their teeth properly. Improper brushing can cause as much damage to the teeth and gums as not brushing at all. Lots of people don\'t brush for long enough, don\'t floss and don\'t see a dentist regularly. Hold your toothbrush in the same way that would hold a pencil, and brush for at least two minutes. This includes brushing the teeth, the junction of the teeth and gums, the tongue and the roof of the mouth. And you don\'t need a fancy, angled toothbrush – just a sturdy, soft-bristled one that you replace each month. </item>
-        <item>Get your brain fizzing with energy. American researchers coined the term \'neurobics\' for tasks which activate the brain\'s own biochemical pathways and to bring new pathways online that can help to strengthen or preserve brain circuits.Brush your teeth with your \'other\' hand, take a new route to work or choose your clothes based on sense of touch rather than sight. People with mental agility tend to have lower rates of Alzheimer\'s disease and age-related mental decline.</item>
-        <item>Always giving and never taking? This is the short road to compassion fatigue. Give to yourself and receive from others, otherwise you\'ll get to a point where you have nothing left to give. And hey, if you can\'t receive from others, how can you expect them to receive from you?</item>
-        <item>Get your daily calcium by popping a tab, chugging milk or eating yoghurt. It\'ll keep your bones strong. Remember that your bone density declines after the age of 30. You need at least 200 milligrams daily, which you should combine with magnesium, or it simply won\'t be absorbed.</item>
-        <item>Blueberries, strawberries and raspberries contain plant nutrients known as anthocyanidins, which are powerful antioxidants. Blueberries rival grapes in concentrations of resveratrol – the antioxidant compound found in red wine that has assumed near mythological proportions. Resveratrol is believed to help protect against heart disease and cancer.</item>
-        <item>Some herbal supplements – from the popular St John\'s Wort and ginkgo biloba to garlic, ginger, ginseng and feverfew – can cause increased bleeding during surgery, warn surgeons. It may be wise to stop taking all medication, including herbal supplements, at least two weeks before surgery, and inform your surgeon about your herbal use.</item>
-        <item>Prevent low blood sugar as it stresses you out. Eat regular and small healthy meals and keep fruit and veggies handy. Herbal teas will also soothe your frazzled nerves.
-
-Eating unrefined carbohydrates, nuts and bananas boosts the formation of serotonin, another feel-good drug. Small amounts of protein containing the amino acid tryptamine can give you a boost when stress tires you out.</item>
-        <item> Don\'t have soft drinks or energy drinks while you\'re exercising. Stay properly hydrated by drinking enough water during your workout (just don\'t overdo things, as drinking too much water can also be dangerous).
-
-While you might need energy drinks for long-distance running, in shorter exercise sessions in the gym, your body will burn the glucose from the soft drink first, before starting to burn body fat. Same goes for eating sweets.</item>
-        <item>When you stretch, ease your body into position until you feel the stretch and hold it for about 25 seconds. Breathe deeply to help your body move oxygen-rich blood to those sore muscles. Don\'t bounce or force yourself into an uncomfortable position.</item>
-        <item>Swimming is the most asthma-friendly sport of all, but cycling, canoeing, fishing, sailing and walking are also good, according to the experts.
-
-Asthma need not hinder peak performance in sport. 1% of the US Olympic team were asthmatics – and between them they won 41 medals.</item>
-        <item>We need fats in our diet, including saturated and polyunsaturated and unsaturated fats. One fat we don\'t need is trans fat, which is known to increase your risk of developing heart disease or having a stroke over a lifetime. This is because trans fat clogs your arteries by raising your bad cholesterol levels (LDL) and lowering your good cholesterol levels (HDL). By cutting them from your diet, you improve the blood flow throughout your body. So, what are trans fats? They are industry-produced fats often used in packaged baked goods, snack foods, margarines and fried fast foods to add flavor and texture.</item>
-        <item>Sleep is an essential part of keeping your heart healthy. If you don\'t sleep enough, you may be at a higher risk for cardiovascular disease no matter your age or other health habits. One study looking at 3,000 adults over the age of 45 found that those who slept fewer than six hours per night were about twice as likely to have a stroke or heart attack as people who slept six to eight hours per night. Researchers believe sleeping too little causes disruptions in underlying health conditions and biological processes, including blood pressure and inflammation.
-
-</item>
-        <item>In recent years, research has suggested that staying seated for long periods of time is bad for your health no matter how much exercise you do. This is bad news for the many people who sit at sedentary jobs all day. When looking at the combined results of several observational studies that included nearly 800,000 people, researchers found that in those who sat the most, there was an associated 147 percent increase in cardiovascular events and a 90 percent increase in death caused by these events. In addition, sitting for long periods of time (especially when traveling) increases your risk of deep vein thrombosis (a blood clot).</item>
-
-    </string-array>
+    <string name="send_sms_doctor">Hello Doctor, I want to meet you regarding my health issues.</string>
 </resources>

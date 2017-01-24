@@ -11,13 +11,22 @@
     tools:context="health.vit.com.healthtracker.FindDoctorActivity"
     tools:showIn="@layout/activity_find_doctor">
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="visible"/>
+
     <ListView
         android:id="@+id/lv_doctors"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="14dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:divider="@android:color/darker_gray"
         android:dividerHeight="1dp"
-        android:footerDividersEnabled="true" />
+        android:footerDividersEnabled="true"
+        android:visibility="visible"/>
 </RelativeLayout>
