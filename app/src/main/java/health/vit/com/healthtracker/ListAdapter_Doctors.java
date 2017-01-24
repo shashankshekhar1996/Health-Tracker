@@ -16,6 +16,7 @@ import java.util.List;
  */
 //first change
     //third change
+//second change
 public class ListAdapter_Doctors extends ArrayAdapter<Doctors> {
 
     TextView tv_name, tv_phone, tv_city;
