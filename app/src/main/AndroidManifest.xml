@@ -3,6 +3,7 @@
     package="health.vit.com.healthtracker">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
         android:allowBackup="true"
@@ -41,34 +42,12 @@
             android:name=".FindDoctorActivity"
             android:label="@string/title_activity_find_doctor"
             android:theme="@style/AppTheme.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.FINDDOCTORACTIVITY" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".HealthTips"
-            android:label="@string/title_health_tips"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.HEALTHTIPS" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".HealthTipsInfo"
-            android:label="@string/title_activity_health_tips_info"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.HEALTHTIPSINFO" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-
         </activity>
     </application>
 
