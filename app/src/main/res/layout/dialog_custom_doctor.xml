@@ -1,20 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <ImageButton
-        android:id="@+id/bt_navigate"
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/tv_heading"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_local_phone_black_48dp"
-        android:background="@android:color/transparent"/>
+        android:background="@android:color/holo_orange_dark"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Contact Me ; )"
+        android:textColor="@android:color/white"
+        android:textSize="30dp"
+        android:textStyle="bold" />
 
-    <ImageButton
-        android:id="@+id/bt_call"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_local_phone_black_48dp"
-        android:background="@android:color/transparent"/>
+    <TableLayout
+        android:id="@+id/tl_1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7">
 
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_column="1"
+                android:layout_weight="1"
+                android:paddingLeft="32dp"
+                android:src="@drawable/ic_face"
+                android:tint="@android:color/holo_green_light" />
+
+            <TextView
+                android:id="@+id/tv_doctor_name"
+                android:layout_width="wrap_content"
+                android:layout_height="96dp"
+                android:layout_column="2"
+                android:layout_weight="4"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="3"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:text="Doctor Name"
+                android:textSize="22sp" />
+        </TableRow>
+    </TableLayout>
+
+    <TableLayout
+        android:id="@+id/tl_2"
+        android:layout_weight="3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="bottom"
+        android:layout_gravity="center">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:layout_marginBottom="16dp">
+
+            <ImageButton
+                android:id="@+id/btn_navigate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_directions"
+                android:tint="@android:color/holo_blue_dark" />
+
+            <ImageButton
+                android:id="@+id/btn_sms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_chat"
+                android:tint="@android:color/holo_purple" />
+
+
+            <ImageButton
+                android:id="@+id/btn_call"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="3"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_local_phone"
+                android:tint="@android:color/holo_green_dark" />
+
+        </TableRow>
+    </TableLayout>
 </LinearLayout>

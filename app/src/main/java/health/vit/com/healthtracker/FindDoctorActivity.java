@@ -32,6 +32,7 @@ public class FindDoctorActivity extends AppCompatActivity {
     private ListAdapter_Doctors adapter;
     private ArrayList<Doctors> doctors_list;
     private Doctors doctor;
+    private Dialog_Doctor dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +60,14 @@ public class FindDoctorActivity extends AppCompatActivity {
                 Doctors doctor = (Doctors) o;
                 Log.i("Doctor", doctor.getName());
 
-                Dialog_Doctor dialog = Dialog_Doctor.newInstance(doctor);
+                dialog = Dialog_Doctor.newInstance(doctor);
                 dialog.show(getFragmentManager(), "Dialog_Doctor");
             }
         });
+    }
+
+    public void dismissDialog1(){
+        dialog.dismiss();
     }
 
     private void callApi() {
