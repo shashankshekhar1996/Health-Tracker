@@ -2,12 +2,12 @@ package health.vit.com.healthtracker;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.android.volley.Request;
@@ -23,16 +23,18 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import health.vit.com.healthtracker.adapters.RecyclerAdapter_Doctors;
 import health.vit.com.healthtracker.utilities.Dialog_Doctor;
+import health.vit.com.healthtracker.utilities.RecyclerViewClickListener;
 
 public class FindDoctorActivity extends AppCompatActivity {
 
     private ProgressBar progressBar;
-    private ListView doctors_listview;
-    private ListAdapter_Doctors adapter;
     private ArrayList<Doctors> doctors_list;
     private Doctors doctor;
     private Dialog_Doctor dialog;
+    private RecyclerAdapter_Doctors adapter_doctors;
+    private RecyclerView doctors_recyclerview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,27 +48,34 @@ public class FindDoctorActivity extends AppCompatActivity {
 
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
 
-        callApi();
+        doctors_recyclerview = (RecyclerView) findViewById(R.id.rv_doctors);
+        doctors_recyclerview.setHasFixedSize(true);
 
-        doctors_listview = (ListView) findViewById(R.id.lv_doctors);
+        //layout manager
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(FindDoctorActivity.this);
+        linearLayoutManager.setSmoothScrollbarEnabled(true);
+        doctors_recyclerview.setLayoutManager(linearLayoutManager);
+
         doctors_list = new ArrayList<>();
-        adapter = new ListAdapter_Doctors(FindDoctorActivity.this, R.layout.list_layout_doctors, doctors_list);
-        doctors_listview.setAdapter(adapter);
-
-        doctors_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        adapter_doctors = new RecyclerAdapter_Doctors(FindDoctorActivity.this, doctors_list, new RecyclerViewClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Object o = doctors_listview.getItemAtPosition(position);
-                Doctors doctor = (Doctors) o;
+            public void onItemClick(View view, int position) {
+                Doctors doctor = doctors_list.get(position);
                 Log.i("Doctor", doctor.getName());
 
                 dialog = Dialog_Doctor.newInstance(doctor);
                 dialog.show(getFragmentManager(), "Dialog_Doctor");
             }
         });
+
+        doctors_recyclerview.setAdapter(adapter_doctors);
+        adapter_doctors.notifyDataSetChanged();
+
+        callApi();
+
     }
 
-    public void dismissDialog1(){
+    public void dismissDialog1() {
         dialog.dismiss();
     }
 
@@ -94,9 +103,9 @@ public class FindDoctorActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                adapter.notifyDataSetChanged();
+                adapter_doctors.notifyDataSetChanged();
                 progressBar.setVisibility(View.GONE);
-                doctors_listview.setVisibility(View.VISIBLE);
+                doctors_recyclerview.setVisibility(View.VISIBLE);
             }
         }, new Response.ErrorListener() {
             @Override
