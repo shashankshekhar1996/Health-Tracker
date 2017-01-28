@@ -24,6 +24,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import health.vit.com.healthtracker.adapters.RecyclerAdapter_Doctors;
+import health.vit.com.healthtracker.models.Doctors;
 import health.vit.com.healthtracker.utilities.Dialog_Doctor;
 import health.vit.com.healthtracker.utilities.RecyclerViewClickListener;
 

@@ -1,4 +1,4 @@
-package health.vit.com.healthtracker;
+package health.vit.com.healthtracker.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;

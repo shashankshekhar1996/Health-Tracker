@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import health.vit.com.healthtracker.Doctors;
 import health.vit.com.healthtracker.R;
+import health.vit.com.healthtracker.models.Doctors;
 import health.vit.com.healthtracker.utilities.RecyclerViewClickListener;
 
 /**

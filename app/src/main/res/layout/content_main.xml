@@ -20,7 +20,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="200dp"
-        android:src="@drawable/ic_heart" />
+        android:src="@drawable/ic_heart_red" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -31,11 +31,4 @@
         android:textColor="#fff"
         android:textSize="28dp" />
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/btn_google_signin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp" />
 </RelativeLayout>

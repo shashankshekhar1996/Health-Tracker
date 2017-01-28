@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import health.vit.com.healthtracker.models.Doctors;
+
 
 /**
  * Created by akshaymahajan on 22/01/17.

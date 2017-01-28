@@ -14,9 +14,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import health.vit.com.healthtracker.Doctors;
 import health.vit.com.healthtracker.FindDoctorActivity;
 import health.vit.com.healthtracker.R;
+import health.vit.com.healthtracker.models.Doctors;
 
 /**
  * Created by akshaymahajan on 22/01/17.
