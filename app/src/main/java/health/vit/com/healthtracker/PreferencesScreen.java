@@ -1,9 +1,11 @@
 package health.vit.com.healthtracker;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
@@ -13,6 +15,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.FirebaseAuth;
+
+import health.vit.com.healthtracker.utilities.Constants;
 
 /**
  * Created by akshaymahajan on 26/01/17.
@@ -24,9 +28,18 @@ public class PreferencesScreen extends PreferenceActivity {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
 
+        //  Initialize SharedPreferences
+        SharedPreferences getPrefs = PreferenceManager
+                .getDefaultSharedPreferences(getBaseContext());
+
+        /** Set User email address in prefs */
+        Preference prefs_connected_account = findPreference(Constants.PREFS_CONNECTED_ACCOUNT);
+        String prefs_profile_email = getPrefs.getString(Constants.PREFS_PROFILE_EMAIL,
+                getResources().getString(R.string.default_email));
+        prefs_connected_account.setSummary(prefs_profile_email);
 
         /** Sign out */
-        Preference prefs_change_account = findPreference("prefs_change_account");
+        Preference prefs_change_account = findPreference(Constants.PREFS_CHANGE_ACCOUNT);
         prefs_change_account.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
@@ -36,7 +49,7 @@ public class PreferencesScreen extends PreferenceActivity {
         });
 
         /** Disconnect Account */
-        Preference prefs_disconnect_account = findPreference("prefs_disconnect_account");
+        Preference prefs_disconnect_account = findPreference(Constants.PREFS_DISCONNECT_ACCOUNT);
         prefs_disconnect_account.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
@@ -85,7 +98,7 @@ public class PreferencesScreen extends PreferenceActivity {
      * Reset username,email,pic,etc.
      */
     private void resetApp() {
-        App.getInstance().setEMAIL_ADDRESS(getResources().getString(R.string.default_email));
+        finishAffinity();
         startActivity(new Intent(PreferencesScreen.this, GoogleSignInActivity.class));
     }
 }

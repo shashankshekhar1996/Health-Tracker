@@ -11,11 +11,11 @@
             android:title="Connected account" />
         <Preference
             android:key="prefs_change_account"
-            android:summary="This will sign out from current account"
+            android:summary="This will also sign out from your current account"
             android:title="Change account" />
         <Preference
             android:key="prefs_disconnect_account"
-            android:summary="Disconnect account and revoke access"
+            android:summary="Disconnect account and revoke access from this app."
             android:title="Disconnect account" />
     </PreferenceCategory>
 </PreferenceScreen>

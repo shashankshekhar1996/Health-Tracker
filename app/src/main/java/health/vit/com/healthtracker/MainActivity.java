@@ -51,19 +51,25 @@ public class MainActivity extends AppCompatActivity
         tv_profile_email = (TextView) hView.findViewById(R.id.tv_profile_email);
 
         tv_profile_email.setText(App.getInstance().getEMAIL_ADDRESS());
+        tv_profile_name.setText(App.getInstance().getUSERNAME());
+        downloadProfilePic("https://lh5.googleusercontent.com/-y4YHD5DqWFw/AAAAAAAAAAI/AAAAAAAAAcg/4aHvf1hSc2g/s96-c/photo.jpg");
     }
 
 
     private void downloadProfilePic(String url) {
-        Picasso.with(MainActivity.this).load(url).fit().placeholder(R.drawable.ic_person).error(R.drawable.ic_person).into(iv_profile_pic, new Callback() {
+
+        Picasso.with(MainActivity.this).load(url).fit().placeholder(R.drawable.ic_person).error(R.drawable.ic_person)
+                .into(iv_profile_pic, new Callback() {
             @Override
             public void onSuccess() {
+                System.out.println("Loaded from internet");
                 iv_profile_pic.setImageTintList(null);
                 iv_profile_pic.setAlpha(1.0f);
             }
 
             @Override
             public void onError() {
+                System.out.println("Loaded from cache");
             }
         });
     }
@@ -75,6 +81,7 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+            finishAffinity();
         }
     }
 

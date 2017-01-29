@@ -148,6 +148,8 @@ public class GoogleSignInActivity extends AppCompatActivity {
                 System.out.println("USER NAME = " + account.getDisplayName() + account.getPhotoUrl());
 
                 App.getInstance().setEMAIL_ADDRESS(account.getEmail());
+                App.getInstance().setUSERNAME(account.getDisplayName());
+                App.getInstance().setPROFILE_PIC_URL(account.getPhotoUrl().toString());
 
                 /** G+ profile */
                 Person person = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
@@ -156,11 +158,6 @@ public class GoogleSignInActivity extends AppCompatActivity {
 
                 //TODO: Send details in bundle
                 //downloadProfilePic(account.getPhotoUrl().toString());
-
-                /** set Views here */
-//                iv_profile_pic.setImageTintList(null);
-//                tv_profile_email.setText(account.getEmail());
-//                tv_profile_name .setText(account.getDisplayName());
 
                 firebaseAuthWithGoogle(account);
 
@@ -198,7 +195,7 @@ public class GoogleSignInActivity extends AppCompatActivity {
                         } else {
                             progressBar.setVisibility(View.GONE);
                             /** Sign in was Successful, go to home page and set profile details in header */
-                            // TODO : Send profile details via Intent Bundle
+                            finishAffinity();
                             startActivity(new Intent(GoogleSignInActivity.this, MainActivity.class));
                         }
                     }
