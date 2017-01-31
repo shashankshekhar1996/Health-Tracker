@@ -52,7 +52,12 @@
             android:name=".FindDoctorActivity"
             android:label="@string/title_activity_find_doctor"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable"></meta-data>
+        </activity>
         <activity
             android:name=".PreferencesScreen"
             android:label="@string/title_activity_preferences"

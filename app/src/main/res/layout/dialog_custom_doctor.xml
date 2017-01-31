@@ -29,8 +29,8 @@
             android:layout_marginTop="20dp">
 
             <ImageView
-                android:layout_gravity="center"
                 android:layout_column="1"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:paddingLeft="32dp"
                 android:src="@drawable/ic_face"
@@ -45,8 +45,8 @@
                 android:ellipsize="end"
                 android:gravity="center"
                 android:maxLines="3"
-                android:paddingStart="5dp"
                 android:paddingEnd="5dp"
+                android:paddingStart="5dp"
                 android:text="Doctor Name"
                 android:textSize="22sp" />
         </TableRow>
@@ -54,17 +54,17 @@
 
     <TableLayout
         android:id="@+id/tl_2"
-        android:layout_weight="3"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:gravity="bottom"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:layout_weight="3"
+        android:gravity="bottom">
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="bottom"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="18dp"
+            android:gravity="bottom">
 
             <ImageButton
                 android:id="@+id/btn_navigate"

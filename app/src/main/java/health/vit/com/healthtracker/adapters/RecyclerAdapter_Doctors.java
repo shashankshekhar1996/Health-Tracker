@@ -47,8 +47,10 @@ public class RecyclerAdapter_Doctors extends RecyclerView.Adapter<RecyclerAdapte
     public void onBindViewHolder(RecyclerAdapter_Doctors.ViewHolder holder, int position) {
         /** set Text in textviews */
         holder.tv_name.setText(doctors_arraylist.get(position).getName());
+        holder.tv_desc.setText(doctors_arraylist.get(position).getDesc());
         holder.tv_phone.setText(doctors_arraylist.get(position).getPhone());
         holder.tv_city.setText(doctors_arraylist.get(position).getCity());
+        holder.tv_address.setText(doctors_arraylist.get(position).getAddress());
     }
 
     @Override
@@ -57,14 +59,16 @@ public class RecyclerAdapter_Doctors extends RecyclerView.Adapter<RecyclerAdapte
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-
-        private TextView tv_name, tv_phone, tv_city;
+        private TextView tv_name, tv_phone, tv_city, tv_address, tv_desc;
 
         public ViewHolder(View itemView) {
             super(itemView);
             tv_name = (TextView) itemView.findViewById(R.id.tv_name);
+            tv_desc = (TextView) itemView.findViewById(R.id.tv_desc);
             tv_phone = (TextView) itemView.findViewById(R.id.tv_phone);
             tv_city = (TextView) itemView.findViewById(R.id.tv_city);
+            tv_address = (TextView) itemView.findViewById(R.id.tv_address);
         }
     }
+
 }

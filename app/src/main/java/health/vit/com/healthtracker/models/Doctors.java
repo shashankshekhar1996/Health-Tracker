@@ -20,6 +20,7 @@ public class Doctors implements Parcelable {
         }
     };
     private Integer id;
+    private String desc;
     private String name;
     private String phone;
     private String city;
@@ -28,9 +29,10 @@ public class Doctors implements Parcelable {
     public Doctors() {
     }
 
-    public Doctors(Integer id, String name, String phone, String city, String address) {
+    public Doctors(Integer id, String name, String desc, String phone, String city, String address) {
         this.id = id;
         this.name = name;
+        this.desc = desc;
         this.phone = phone;
         this.city = city;
         this.address = address;
@@ -39,9 +41,18 @@ public class Doctors implements Parcelable {
     protected Doctors(Parcel in) {
         this.id = (Integer) in.readValue(Integer.class.getClassLoader());
         this.name = in.readString();
+        this.desc = in.readString();
         this.phone = in.readString();
         this.city = in.readString();
         this.address = in.readString();
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public String getAddress() {
