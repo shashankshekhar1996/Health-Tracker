@@ -10,4 +10,5 @@ public class Constants {
     public static final String PREFS_CONNECTED_ACCOUNT = "prefs_connected_account";
     public static final String PREFS_CHANGE_ACCOUNT = "prefs_change_account";
     public static final String PREFS_DISCONNECT_ACCOUNT = "prefs_disconnect_account";
+    public static final String PREFS_EMERGENCY_CONTACT = "prefs_emergency_contact";
 }

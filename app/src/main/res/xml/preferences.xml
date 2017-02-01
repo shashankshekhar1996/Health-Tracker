@@ -3,6 +3,10 @@
     <SwitchPreference
         android:summary="Get daily Notifications"
         android:title="Health Tips"></SwitchPreference>
+    <Preference
+        android:key="prefs_emergency_contact"
+        android:summary="Message will be sent to this contact in case of any emergency"
+        android:title="Emergency Contact" />
     <PreferenceCategory android:title="Manage Accounts">
         <Preference
             android:enabled="false"
