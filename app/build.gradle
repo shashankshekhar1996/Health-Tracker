@@ -49,6 +49,9 @@ dependencies {
     /* App Intro */
     compile 'com.github.paolorotolo:appintro:4.1.0'
 
+    /* Animation */
+    compile 'com.airbnb.android:lottie:1.0.1'
+
     testCompile 'junit:junit:4.12'
 }
 

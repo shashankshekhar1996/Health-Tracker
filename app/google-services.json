@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "41850627509",
+    "firebase_url": "https://healthtracker-9572c.firebaseio.com",
+    "project_id": "healthtracker-9572c",
+    "storage_bucket": "healthtracker-9572c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:41850627509:android:f8b8feef70cb3734",
+        "android_client_info": {
+          "package_name": "health.vit.com.healthtracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "41850627509-aiccsum70u2aappfpvj74r87dn33v429.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "health.vit.com.healthtracker",
+            "certificate_hash": "48272E1034A5920EBD37B353176E0685D19F2F86"
+          }
+        },
+        {
+          "client_id": "41850627509-6l0osua3r5u2dp1s8gdud0hotfi81dai.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBngucYkkXFyowXgtbcqaIV3y7E-Q4oOcQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "41850627509-6l0osua3r5u2dp1s8gdud0hotfi81dai.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
