@@ -38,18 +38,18 @@ public class Reminder extends AppCompatActivity {
         });
 
 
-        Intent myIntent = new Intent(this , NotifyService.class);
+        //Intent myIntent = new Intent(this , NotifyService.class);
         AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-        PendingIntent pendingIntent = PendingIntent.getService(this, 0, myIntent, 0);
+       /* PendingIntent pendingIntent = PendingIntent.getService(this, 0, myIntent, 0);
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.HOUR, 0);
         calendar.set(Calendar.AM_PM, Calendar.AM);
-        calendar.add(Calendar.DAY_OF_MONTH, 1);
+        calendar.add(Calendar.DAY_OF_MONTH, 1);*/
 
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000*60*60*24 , pendingIntent);
+       // alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 1000*60*60*24 , pendingIntent);
 
 
 

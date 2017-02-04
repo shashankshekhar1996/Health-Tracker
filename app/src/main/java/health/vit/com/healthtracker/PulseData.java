@@ -1,9 +1,23 @@
 package health.vit.com.healthtracker;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.hardware.camera2.CaptureResult;
+import android.renderscript.Script;
+
+import java.sql.Timestamp;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
 /**
  * Created by shashankshekhar on 22/01/17.
@@ -23,6 +37,10 @@ public class PulseData {
     private final Context context;
     private SQLiteDatabase database;
 
+    private Date toDate;
+    private Date fromDate;
+
+
     public class DbHelper extends SQLiteOpenHelper{
 
         public DbHelper(Context context) {
@@ -35,9 +53,9 @@ public class PulseData {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-           db.execSQL("CREATE TABLE" + DATABASE_TABLE + "(" +
+           db.execSQL("CREATE TABLE " + DATABASE_TABLE + "(" +
                     KEY_ROWID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    KEY_PULSERATE + " INTEGER NOT NULL " +
+                    KEY_PULSERATE + " INTEGER NOT NULL, " +
                     KEY_TIMESTAMP + " DATETIME DEFAULT CURRENT_TIMESTAMP);"
             );
         }
@@ -54,13 +72,99 @@ public class PulseData {
     }
 
     public PulseData open(){
-        dbHelper = new DbHelper(context);
-        database = dbHelper.getWritableDatabase();
+        try{
+            dbHelper = new DbHelper(context);
+            database = dbHelper.getWritableDatabase();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         return this;
     }
 
     public void close(){
         dbHelper.close();
+
+    }
+
+    public long createEntry(String a, String b){
+        ContentValues cv = new ContentValues();
+        cv.put(KEY_PULSERATE,Integer.parseInt(a));
+        cv.put(KEY_TIMESTAMP,b);
+        return database.insert(DATABASE_TABLE,null, cv);
+
+    }
+
+
+    public String getData() {
+        String[] col = new String[]{KEY_ROWID, KEY_PULSERATE, KEY_TIMESTAMP};
+        Cursor c = database.query(DATABASE_TABLE,col,null,null,null,null,null);
+        String result = "";
+        int iRow = c.getColumnIndex(KEY_ROWID);
+        int iPulserate = c.getColumnIndex(KEY_PULSERATE);
+        int iTime = c.getColumnIndex(KEY_TIMESTAMP);
+
+
+
+        for(c.moveToFirst(); !c.isAfterLast(); c.moveToNext()){
+            result+=c.getInt(iRow) +" "+c.getInt(iPulserate)+" "+c.getString(iTime) + "\n";
+        }
+        return result;
+    }
+
+   // public
+
+    public LinkedHashMap<String, Integer> getAllData(String from, String to, String str) {
+
+        String[] col = new String[]{KEY_ROWID, KEY_PULSERATE, KEY_TIMESTAMP};
+        LinkedHashMap<String, Integer> map = new LinkedHashMap<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            toDate = sdf.parse(to);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        try{
+            fromDate = sdf.parse(from);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        Timestamp fromTime = new Timestamp(fromDate.getTime());
+        Timestamp toTime = new Timestamp(toDate.getTime());
+        //Date d = (Date)
+
+        //Date t = new Date(fro)
+        Cursor c = null;
+       // if(fromTime != toTime){
+        if(str.equals("DATETIMEASC")) {
+            c = database.rawQuery("SELECT * FROM " + DATABASE_TABLE + " WHERE " + KEY_TIMESTAMP + ">='" + fromTime + "' AND " + KEY_TIMESTAMP + "<='" + toTime + "' ORDER BY " + KEY_TIMESTAMP + ";", null);
+        }else if(str.equals("PULSEASC")){
+            c = database.rawQuery("SELECT * FROM " + DATABASE_TABLE + " WHERE " + KEY_TIMESTAMP + ">='" + fromTime + "' AND " + KEY_TIMESTAMP + "<='" + toTime + "' ORDER BY " + KEY_PULSERATE + ";", null);
+        }else if(str.equals("DATETIMEDESC")){
+            c = database.rawQuery("SELECT * FROM " + DATABASE_TABLE + " WHERE " + KEY_TIMESTAMP + ">='" + fromTime + "' AND " + KEY_TIMESTAMP + "<='" + toTime + "' ORDER BY " + KEY_TIMESTAMP + " DESC;", null);
+        }else if(str.equals("PULSEDESC")){
+            c = database.rawQuery("SELECT * FROM " + DATABASE_TABLE + " WHERE " + KEY_TIMESTAMP + ">='" + fromTime + "' AND " + KEY_TIMESTAMP + "<='" + toTime + "' ORDER BY " + KEY_PULSERATE + " DESC;", null);
+        }else{
+            c = database.rawQuery("SELECT * FROM " + DATABASE_TABLE + " WHERE " + KEY_TIMESTAMP + ">='" + fromTime + "' AND " + KEY_TIMESTAMP + "<='" + toTime + "';", null);
+        }
+       /* }else{
+             c = database.rawQuery("SELECT * FROM " + DATABASE_TABLE + " WHERE " + KEY_TIMESTAMP + "='" + toTime + "';",null);
+
+        }*/
+
+
+        String result = "";
+        int iRow = c.getColumnIndex(KEY_ROWID);
+        int iPulserate = c.getColumnIndex(KEY_PULSERATE);
+        int iTime = c.getColumnIndex(KEY_TIMESTAMP);
+
+        for(c.moveToFirst(); !c.isAfterLast(); c.moveToNext()){
+           // result+=c.getInt(iRow) +" "+c.getString(iPulserate)+" "+c.getString(iTime) + "\n";
+            map.put(c.getString(iTime), c.getInt(iPulserate));
+        }
+        return map;
     }
     
 }

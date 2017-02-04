@@ -16,6 +16,14 @@
     <string name="title_activity_health_tips_info">HealthTipsInfo</string>
 
 
+    <string-array name="spin_data">
+        <item>Sort By Date and Time (Ascending)</item>
+        <item>Sort by PulseRate (Ascending)</item>
+        <item>Sort By Date and Time (Descending)</item>
+        <item>Sort by PulseRate (Descending)</item>
+    </string-array>
+
+
     <string-array name="heading">
         <item>Copy your kitty</item>
         <item>Don\'t skip breakfast</item>
@@ -61,4 +69,9 @@ Asthma need not hinder peak performance in sport. 1% of the US Olympic team were
         <item>In recent years, research has suggested that staying seated for long periods of time is bad for your health no matter how much exercise you do. This is bad news for the many people who sit at sedentary jobs all day. When looking at the combined results of several observational studies that included nearly 800,000 people, researchers found that in those who sat the most, there was an associated 147 percent increase in cardiovascular events and a 90 percent increase in death caused by these events. In addition, sitting for long periods of time (especially when traveling) increases your risk of deep vein thrombosis (a blood clot).</item>
 
     </string-array>
+    <string name="title_activity_pulse_data_fetch">PulseDataFetch</string>
+    <string name="title_activity_pulse_graph">PulseGraph</string>
+    <string name="title_activity_pulse_rate_graph">PulseRateGraph</string>
+    <string name="title_activity_pulse_table">PulseTable</string>
+    <string name="title_activity_data_error">DataError</string>
 </resources>

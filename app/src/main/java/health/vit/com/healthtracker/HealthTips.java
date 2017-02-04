@@ -1,5 +1,8 @@
 package health.vit.com.healthtracker;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -18,6 +21,7 @@ public class HealthTips extends AppCompatActivity {
     private String[] healthTipsHeading = {};//getResources().getStringArray(R.array.heading); //{"Drink more Water today.","Drink more Water today.","Drink more Water today.","Drink more Water today."};
     private String[] healthTipsPara = {}; //getResources().getStringArray(R.array.paras);//{"Drink more Water today.","Drink more Water today.","Drink more Water today.","Drink more Water today."};
     ListView lv;
+  //  AlarmManager am;
 
 
 
@@ -28,6 +32,9 @@ public class HealthTips extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+       // am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        //setOneTimeAlarm();
 
         healthTipsHeading = getResources().getStringArray(R.array.heading);
         healthTipsPara = getResources().getStringArray(R.array.paras);
@@ -62,6 +69,22 @@ public class HealthTips extends AppCompatActivity {
 
 
     }
+
+/*
+    public void setOneTimeAlarm() {
+        Intent intent = new Intent(HealthTips.this, AlarmTime.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+        am.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + (5), pendingIntent);
+    }
+
+
+    public void setRepeatingAlarm() {
+        Intent intent = new Intent(HealthTips.this, AlarmTime.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), (5 * 1000), pendingIntent);
+    }
+*/
+
     /*
 
     @Override
@@ -72,6 +95,5 @@ public class HealthTips extends AppCompatActivity {
         intent.putExtra("head", healthTipsHeading[position]);
         intent.putExtra("para", healthTipsPara[position]);
         startActivity(intent);
-        //startActivity(new Intent(HealthTips.this, HealthTipsData.class));
     }*/
 }
