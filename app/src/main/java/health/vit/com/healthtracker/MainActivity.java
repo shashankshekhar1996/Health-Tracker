@@ -124,7 +124,6 @@ public class MainActivity extends AppCompatActivity
             startActivity(new Intent(MainActivity.this, FindDoctorActivity.class));
 
         } else if (id == R.id.nav_slideshow) {
-            startActivity(new Intent(MainActivity.this, HealthTips.class));
 
         } else if (id == R.id.nav_manage) {
 

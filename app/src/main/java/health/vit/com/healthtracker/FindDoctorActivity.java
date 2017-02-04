@@ -5,7 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -20,8 +23,11 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import health.vit.com.healthtracker.utilities.Dialog_Doctor;
+
 public class FindDoctorActivity extends AppCompatActivity {
 
+    private ProgressBar progressBar;
     private ListView doctors_listview;
     private ListAdapter_Doctors adapter;
     private ArrayList<Doctors> doctors_list;
@@ -37,25 +43,29 @@ public class FindDoctorActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+
+        callApi();
+
         doctors_listview = (ListView) findViewById(R.id.lv_doctors);
         doctors_list = new ArrayList<>();
         adapter = new ListAdapter_Doctors(FindDoctorActivity.this, R.layout.list_layout_doctors, doctors_list);
         doctors_listview.setAdapter(adapter);
 
-        /*
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        doctors_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Object o = doctors_listview.getItemAtPosition(position);
+                Doctors doctor = (Doctors) o;
+                Log.i("Doctor", doctor.getName());
+
+                Dialog_Doctor dialog = Dialog_Doctor.newInstance(doctor);
+                dialog.show(getFragmentManager(), "Dialog_Doctor");
             }
-        });*/
+        });
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
+    private void callApi() {
 
         RequestQueue requestQueue = Volley.newRequestQueue(FindDoctorActivity.this);
         String filter_doctors_url = getString(R.string.filter_doctor_url);
@@ -70,13 +80,18 @@ public class FindDoctorActivity extends AppCompatActivity {
                         JSONObject obj = details.getJSONObject(i);
                         String doctor_name = obj.get("name").toString();
                         Log.i("MESSAGE", doctor_name);
-                        doctor = new Doctors(Integer.valueOf(obj.get("id").toString()), obj.get("name").toString(), obj.get("phone").toString(), obj.get("city").toString());
+                        // TODO: change last params to address
+                        doctor = new Doctors(Integer.valueOf(obj.get("id").toString()),
+                                obj.get("name").toString(), obj.get("phone").toString(),
+                                obj.get("city").toString(), obj.get("city").toString());
                         doctors_list.add(doctor);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
                 adapter.notifyDataSetChanged();
+                progressBar.setVisibility(View.GONE);
+                doctors_listview.setVisibility(View.VISIBLE);
             }
         }, new Response.ErrorListener() {
             @Override
