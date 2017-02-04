@@ -8,13 +8,21 @@
     <string name="title_activity_reminder">Reminder</string>
     <string name="title_activity_pulse_data_view">PulseDataView</string>
     <string name="title_activity_find_doctor">FindDoctorActivity</string>
-    <string name="title_health_tips">HealthTips</string>
+    <string name="title_activity_preferences">Preferences</string>
+    <string name="app_intro">Intro Activity</string>
+    <string name="title_activity_google_in">Google SignIn</string>
 
     <!-- Project-specific Strings like URLs, Names ,etc. -->
 
-    <string name="filter_doctor_url">http://socketchat.tk/sendjson.php</string>
-    <string name="title_activity_health_tips_info">HealthTipsInfo</string>
+    <string name="filter_doctor_url">http://socketchat.tk/sendjson.php/?</string>
+    <string name="send_sms_doctor">Hello Doctor, I want to meet you regarding my health issues.</string>
+    <string name="default_email">abc@gmail.com</string>
+    <string name="default_username">Username</string>
 
+    <array name="filter_find_doctor">
+        <item name="city">city</item>
+        <item name="name">name</item>
+    </array>
 
     <string-array name="spin_data">
         <item>Sort By Date and Time (Ascending)</item>

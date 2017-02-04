@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <SwitchPreference
+        android:summary="Get daily Notifications"
+        android:title="Health Tips"></SwitchPreference>
+    <Preference
+        android:key="prefs_emergency_contact"
+        android:summary="Message will be sent to this contact in case of any emergency"
+        android:title="Emergency Contact" />
+    <PreferenceCategory android:title="Manage Accounts">
+        <Preference
+            android:enabled="false"
+            android:key="prefs_connected_account"
+            android:summary="abc@gmail.com"
+            android:title="Connected account" />
+        <Preference
+            android:key="prefs_change_account"
+            android:summary="This will also sign out from your current account"
+            android:title="Change account" />
+        <Preference
+            android:key="prefs_disconnect_account"
+            android:summary="Disconnect account and revoke access from this app."
+            android:title="Disconnect account" />
+    </PreferenceCategory>
+</PreferenceScreen>

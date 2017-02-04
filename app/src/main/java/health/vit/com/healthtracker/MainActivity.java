@@ -6,9 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -18,6 +16,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -29,22 +33,20 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private CircleImageView iv_profile_pic;
+    private TextView tv_profile_name, tv_profile_email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setupDrawer();
+    }
+
+    private void setupDrawer() {
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -73,6 +75,34 @@ public class MainActivity extends AppCompatActivity
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
        // client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+        View hView = navigationView.getHeaderView(0);
+        iv_profile_pic = (CircleImageView) hView.findViewById(R.id.iv_profile_pic);
+        tv_profile_name = (TextView) hView.findViewById(R.id.tv_profile_username);
+        tv_profile_email = (TextView) hView.findViewById(R.id.tv_profile_email);
+
+        tv_profile_email.setText(App.getInstance().getEMAIL_ADDRESS());
+        tv_profile_name.setText(App.getInstance().getUSERNAME());
+        downloadProfilePic("https://lh5.googleusercontent.com/-y4YHD5DqWFw/AAAAAAAAAAI/AAAAAAAAAcg/4aHvf1hSc2g/s96-c/photo.jpg");
+    }
+
+
+    private void downloadProfilePic(String url) {
+
+        Picasso.with(MainActivity.this).load(url).fit().placeholder(R.drawable.ic_person).error(R.drawable.ic_person)
+                .into(iv_profile_pic, new Callback() {
+            @Override
+            public void onSuccess() {
+                System.out.println("Loaded from internet");
+                iv_profile_pic.setImageTintList(null);
+                iv_profile_pic.setAlpha(1.0f);
+            }
+
+            @Override
+            public void onError() {
+                System.out.println("Loaded from cache");
+            }
+        });
     }
 
     @Override
@@ -82,6 +112,7 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+            finishAffinity();
         }
     }
 
@@ -127,6 +158,9 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_manage) {
 
+        } else if (id == R.id.nav_settings) {
+            /** Preferences Screen */
+            startActivity(new Intent(MainActivity.this, PreferencesScreen.class));
         } else if (id == R.id.nav_share) {
             startActivity(new Intent(MainActivity.this, PulseDataView.class));
 
@@ -139,8 +173,4 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-
-
-
 }

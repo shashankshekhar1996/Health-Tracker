@@ -10,11 +10,12 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import health.vit.com.healthtracker.models.Doctors;
+
 
 /**
  * Created by akshaymahajan on 22/01/17.
  */
-
 public class ListAdapter_Doctors extends ArrayAdapter<Doctors> {
 
     TextView tv_name, tv_phone, tv_city;
