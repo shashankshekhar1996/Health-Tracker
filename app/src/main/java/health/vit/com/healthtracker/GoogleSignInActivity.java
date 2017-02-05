@@ -66,7 +66,6 @@ public class GoogleSignInActivity extends AppCompatActivity {
             App.getGoogleSignInHelper().connect();
         }
 
-        //googleInit();
 
         SignInButton btn_google_sign_in = (SignInButton) findViewById(R.id.btn_google_signin);
         btn_google_sign_in.setOnClickListener(new View.OnClickListener() {
@@ -97,34 +96,6 @@ public class GoogleSignInActivity extends AppCompatActivity {
     }
 
 
-    public void googleInit() {
-        /** Configure Google Sign In */
-        if (gso == null) {
-            try {
-                gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                        .requestIdToken(getString(R.string.default_web_client_id))
-                        .requestEmail()
-                        .requestProfile()
-                        .requestScopes(new Scope(Scopes.PLUS_ME))
-                        .requestScopes(new Scope(Scopes.PLUS_LOGIN))
-                        .build();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            if (mGoogleApiClient == null) {
-                try {
-                    mGoogleApiClient = new GoogleApiClient.Builder(this)
-                            //.enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
-                            .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                            .addApi(Plus.API)
-                            .build();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
 
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
@@ -151,10 +122,10 @@ public class GoogleSignInActivity extends AppCompatActivity {
                 App.getInstance().setUSERNAME(account.getDisplayName());
                 App.getInstance().setPROFILE_PIC_URL(account.getPhotoUrl().toString());
 
-                /** G+ profile */
+              /*  *//** G+ profile *//*
                 Person person = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
                 String gender = person.getGender() == 0 ? "male" : "female";
-                Log.i("Profile", gender + person.getAgeRange().getMin());
+                Log.i("Profile", gender + person.getAgeRange().getMin());*/
 
                 //TODO: Send details in bundle
                 //downloadProfilePic(account.getPhotoUrl().toString());

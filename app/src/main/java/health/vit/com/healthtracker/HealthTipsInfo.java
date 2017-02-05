@@ -10,10 +10,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import static health.vit.com.healthtracker.R.id.textView;
-
 public class HealthTipsInfo extends AppCompatActivity {
 
     private TextView header;

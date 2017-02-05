@@ -15,14 +15,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "41850627509-aiccsum70u2aappfpvj74r87dn33v429.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "health.vit.com.healthtracker",
-            "certificate_hash": "48272E1034A5920EBD37B353176E0685D19F2F86"
-          }
-        },
-        {
           "client_id": "41850627509-6l0osua3r5u2dp1s8gdud0hotfi81dai.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -20,12 +20,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Set;
 import java.util.UUID;
 
-import static health.vit.com.healthtracker.R.id.textView;
 
 public class BluetoothData extends AppCompatActivity {
 

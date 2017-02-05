@@ -23,11 +23,6 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
-import com.google.android.gms.common.api.GoogleApiClient;
-
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity
@@ -83,7 +78,7 @@ public class MainActivity extends AppCompatActivity
 
         tv_profile_email.setText(App.getInstance().getEMAIL_ADDRESS());
         tv_profile_name.setText(App.getInstance().getUSERNAME());
-        downloadProfilePic("https://lh5.googleusercontent.com/-y4YHD5DqWFw/AAAAAAAAAAI/AAAAAAAAAcg/4aHvf1hSc2g/s96-c/photo.jpg");
+        downloadProfilePic(App.getInstance().getPROFILE_PIC_URL());
     }
 
 
@@ -147,9 +142,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             //Intent i = new Intent("")
             startActivity(new Intent(MainActivity.this, Reminder.class));
-
-
-            // Handle the camera action
+            
         } else if (id == R.id.nav_doctors) {
             /** Go to Find Doctors Activity */
             startActivity(new Intent(MainActivity.this, FindDoctorActivity.class));
@@ -157,14 +150,16 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
+            startActivity(new Intent(MainActivity.this, PulseDataView.class));
+
 
         } else if (id == R.id.nav_settings) {
             /** Preferences Screen */
             startActivity(new Intent(MainActivity.this, PreferencesScreen.class));
-        } else if (id == R.id.nav_share) {
-            startActivity(new Intent(MainActivity.this, PulseDataView.class));
+        } //else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+        //}
+            else if (id == R.id.nav_send) {
 
             startActivity(new Intent(MainActivity.this, PulseDataFetch.class));
         }

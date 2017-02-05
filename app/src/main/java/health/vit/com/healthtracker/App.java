@@ -13,7 +13,7 @@ import health.vit.com.healthtracker.utilities.GoogleSignInHelper;
 
 public class App extends Application {
     private static App mInstance;
-    public String PROFILE_PIC_URL;
+    private String PROFILE_PIC_URL;
     private GoogleSignInHelper googleSignInHelper;
     private String EMAIL_ADDRESS, USERNAME;
     private SharedPreferences getPrefs;
