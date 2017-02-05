@@ -12,7 +12,6 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Scope;
-import com.google.android.gms.plus.Plus;
 
 import health.vit.com.healthtracker.R;
 
@@ -42,7 +41,8 @@ public class GoogleSignInHelper implements GoogleApiClient.ConnectionCallbacks, 
                 .build();
         mGoogleApiClient = new GoogleApiClient.Builder(context)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .addApi(Plus.API)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
                 .build();
     }
 

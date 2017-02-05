@@ -19,8 +19,9 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
-        android:layout_marginTop="200dp"
-        android:src="@drawable/ic_heart_red" />
+        android:layout_marginTop="175dp"
+        android:src="@drawable/ic_heart"
+        android:visibility="visible" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -30,5 +31,15 @@
         android:text="Welcome :)"
         android:textColor="#fff"
         android:textSize="28dp" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="TwitterHeart.json"
+        app:lottie_loop="true" />
 
 </RelativeLayout>

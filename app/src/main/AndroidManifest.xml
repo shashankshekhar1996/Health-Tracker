@@ -3,7 +3,6 @@
     package="health.vit.com.healthtracker">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
@@ -63,6 +62,10 @@
             android:name=".PreferencesScreen"
             android:label="@string/title_activity_preferences"
             android:screenOrientation="portrait" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAxXvQWI0p5Tglz4XOXVb5F4Q-dLlO-7Hw" />
     </application>
 
 </manifest>

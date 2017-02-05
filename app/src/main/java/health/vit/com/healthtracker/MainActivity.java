@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity
 
         tv_profile_email.setText(App.getInstance().getEMAIL_ADDRESS());
         tv_profile_name.setText(App.getInstance().getUSERNAME());
-        downloadProfilePic("https://lh5.googleusercontent.com/-y4YHD5DqWFw/AAAAAAAAAAI/AAAAAAAAAcg/4aHvf1hSc2g/s96-c/photo.jpg");
+        downloadProfilePic(App.getInstance().getPROFILE_PIC_URL());
     }
 
 

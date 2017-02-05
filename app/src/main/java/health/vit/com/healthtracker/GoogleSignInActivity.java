@@ -19,7 +19,6 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.plus.Plus;
-import com.google.android.gms.plus.model.people.Person;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -152,9 +151,11 @@ public class GoogleSignInActivity extends AppCompatActivity {
                 App.getInstance().setPROFILE_PIC_URL(account.getPhotoUrl().toString());
 
                 /** G+ profile */
+                /** User must have a Google Plus Profile *//*
                 Person person = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
                 String gender = person.getGender() == 0 ? "male" : "female";
-                Log.i("Profile", gender + person.getAgeRange().getMin());
+                Log.i("Profile", gender + person.getAgeRange().getMin());*/
+
 
                 //TODO: Send details in bundle
                 //downloadProfilePic(account.getPhotoUrl().toString());
@@ -216,5 +217,6 @@ public class GoogleSignInActivity extends AppCompatActivity {
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
+
 
 }
