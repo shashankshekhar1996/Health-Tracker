@@ -58,6 +58,8 @@ public class MainActivity extends AppCompatActivity
 
     private void downloadProfilePic(String url) {
 
+        System.out.println(App.getInstance().getPROFILE_PIC_URL());
+
         Picasso.with(MainActivity.this).load(url).fit().placeholder(R.drawable.ic_person).error(R.drawable.ic_person)
                 .into(iv_profile_pic, new Callback() {
             @Override
@@ -69,7 +71,7 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onError() {
-                System.out.println("Loaded from cache");
+                System.out.println("Could not fetch");
             }
         });
     }
@@ -126,6 +128,10 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
+
+        } else if (id == R.id.nav_maps) {
+            /** Maps Activity*/
+            startActivity(new Intent(MainActivity.this, MapsActivity.class));
 
         } else if (id == R.id.nav_settings) {
             /** Preferences Screen */
