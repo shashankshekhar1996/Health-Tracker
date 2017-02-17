@@ -13,112 +13,148 @@
     tools:context="health.vit.com.healthtracker.PulseDataView"
     tools:showIn="@layout/activity_pulse_data_view">
 
-    <Button
-        android:id="@+id/btn_table"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:drawableLeft="@drawable/ic_table"
-        android:drawableTint="#fff"
-        android:padding="20dp"
-        android:textColor="#fff"
-        android:text="Table"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="27dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+        android:id="@+id/layout_1"
+        android:orientation="vertical">
 
 
-    <Button
-        android:id="@+id/btn_linechart"
+
+        <TextView
+            android:id="@+id/heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:padding="15dp"
+            android:text="Select From Date and To Date to view the graphical data"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="100"
+            android:padding="8dp">
+
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/fromDate"
+                android:layout_weight="50"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button" />
+
+
+            <Button
+                android:text="SELECT FROM DATE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:id="@+id/fromDateBtn"
+                android:layout_weight="50"
+                android:textColor="#fff"
+                style="@android:style/Widget.Material.Button"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button" />
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:weightSum="100">
+
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/toDateBtn"
+                android:layout_alignStart="@+id/fromDate"
+                android:id="@+id/toDate"
+                android:layout_weight="50"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button" />
+
+
+            <Button
+                android:text="SELECT    TO    DATE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:id="@+id/toDateBtn"
+                android:layout_weight="50"
+                android:textColor="#fff"
+                style="@android:style/Widget.Material.Button"
+                android:layout_below="@+id/fromDateBtn"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:drawableLeft="@drawable/ic_line_chart"
-        android:drawableTint="#fff"
-        android:padding="20dp"
-        android:textColor="#fff"
-        android:text="Line Chart"
-        android:layout_marginBottom="10dp"
-        android:layout_above="@+id/btn_barchart"
-        android:layout_alignParentStart="true"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
-
-    <Button
-        android:text="SELECT FROM DATE"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:id="@+id/fromDateBtn"
+        android:layout_below="@+id/layout_1"
         android:padding="15dp"
-        android:textColor="#fff"
-        style="@android:style/Widget.Material.Button"
-        android:layout_marginTop="47dp"
-        android:layout_below="@+id/heading"
-        android:layout_alignParentEnd="true"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        android:orientation="vertical">
 
-    <Button
-        android:text="SELECT TO DATE"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:id="@+id/toDateBtn"
-        android:padding="15dp"
-        android:textColor="#fff"
-        style="@android:style/Widget.Material.Button"
-        android:layout_below="@+id/fromDateBtn"
-        android:layout_marginTop="20dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignStart="@+id/fromDateBtn"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        <Button
+            android:id="@+id/btn_linechart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:drawableLeft="@drawable/ic_line_chart"
+            android:drawableTint="#fff"
+            android:padding="20dp"
+            android:textColor="#fff"
+            android:text="Line Chart"
+            android:layout_marginBottom="10dp"
+            android:layout_above="@+id/btn_barchart"
+            android:layout_alignParentStart="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/toDateBtn"
-        android:layout_alignStart="@+id/fromDate"
-        android:layout_marginTop="14dp"
-        android:id="@+id/toDate"
-        android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="42dp"
-        android:id="@+id/fromDate"
-        android:layout_alignBaseline="@+id/fromDateBtn"
-        android:layout_alignBottom="@+id/fromDateBtn"
-        android:layout_toStartOf="@+id/fromDateBtn"
-        android:textAppearance="@style/TextAppearance.AppCompat.Button" />
+        <Button
+            android:id="@+id/btn_barchart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:drawableLeft="@drawable/ic_bar_chart"
+            android:drawableTint="#fff"
+            android:padding="20dp"
+            android:textColor="#fff"
+            android:layout_marginBottom="10dp"
+            android:text="Bar Chart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:layout_above="@+id/btn_table"
+            android:layout_alignParentStart="true" />
 
-    <TextView
-        android:id="@+id/heading"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:text="Select From Date and To Date to view the graphical data"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:layout_marginTop="54dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        <Button
+            android:id="@+id/btn_table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:drawableLeft="@drawable/ic_table"
+            android:drawableTint="#fff"
+            android:padding="20dp"
+            android:textColor="#fff"
+            android:text="Table"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="27dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
-    <Button
-        android:id="@+id/btn_barchart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:drawableLeft="@drawable/ic_bar_chart"
-        android:drawableTint="#fff"
-        android:padding="20dp"
-        android:textColor="#fff"
-        android:layout_marginBottom="10dp"
-        android:text="Bar Chart"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:layout_above="@+id/btn_table"
-        android:layout_alignParentStart="true" />
+
+
+
+    </LinearLayout>
 
 
 </RelativeLayout>

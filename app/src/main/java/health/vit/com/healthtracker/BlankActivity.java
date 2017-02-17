@@ -27,7 +27,7 @@ public final class BlankActivity extends Activity {
             startActivity(new Intent(BlankActivity.this, IntroActivity.class));
         } else {
             // Launch Home Page
-            startActivity(new Intent(BlankActivity.this, GoogleSignInActivity.class));
+            startActivity(new Intent(BlankActivity.this, MainActivity.class));
         }
         System.out.println("Done fetching prefs");
     }

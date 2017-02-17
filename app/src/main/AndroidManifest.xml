@@ -81,7 +81,12 @@
         </activity>
         <activity
             android:name=".HealthTipsInfo"
+            android:excludeFromRecents="true"
             android:label="@string/title_activity_health_tips_info"
+            android:launchMode="singleTop"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:taskAffinity=""
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.HEALTHTIPSINFO" />
@@ -162,6 +167,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
             android:name=".PreferencesScreen"
             android:label="@string/title_activity_preferences"
             android:screenOrientation="portrait" />
