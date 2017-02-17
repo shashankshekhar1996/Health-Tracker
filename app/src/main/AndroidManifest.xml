@@ -7,8 +7,12 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <slauses-permission android:name="android.permission.SEND_SMS" />
+
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
     <application
         android:name=".App"
@@ -17,16 +21,15 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".BlankActivity"
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".IntroActivity"
             android:label="@string/app_intro"
@@ -59,6 +62,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+
         <activity
             android:name=".FindDoctorActivity"
             android:label="@string/title_activity_find_doctor"
@@ -67,7 +72,7 @@
             android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.app.searchable"
-                android:resource="@xml/searchable"></meta-data>
+                android:resource="@xml/searchable" />
         </activity>
         <activity
             android:name=".HealthTips"
@@ -81,13 +86,22 @@
         </activity>
         <activity
             android:name=".HealthTipsInfo"
+            android:excludeFromRecents="true"
             android:label="@string/title_activity_health_tips_info"
+            android:launchMode="singleTop"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            android:taskAffinity=""
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.HEALTHTIPSINFO" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
         </activity>
 
         <service
@@ -155,16 +169,36 @@
             android:name=".DataError"
             android:label="@string/title_activity_data_error"
             android:theme="@style/AppTheme.NoActionBar">
-
             <intent-filter>
                 <action android:name="android.intent.action.DATAERROR" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-            android:name=".PreferencesScreen"
-            android:label="@string/title_activity_preferences"
-            android:screenOrientation="portrait" />
+        android:name=".PreferencesScreen"
+        android:label="@string/title_activity_preferences"
+        android:screenOrientation="portrait" />
+        <activity
+            android:name=".DeviceList"
+            android:label="@string/title_activity_device_list"
+            android:theme="@style/AppTheme.NoActionBar">
+        <intent-filter>
+            <action android:name="android.intent.action.DEVICELIST" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter>
+        </activity>
+        <activity
+            android:name=".BluetoothActivity"
+            android:label="@string/title_activity_bluetooth"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.BLUETOOTHACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+        </activity>
     </application>
 
 </manifest>

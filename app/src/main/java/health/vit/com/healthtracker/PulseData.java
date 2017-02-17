@@ -114,6 +114,36 @@ public class PulseData {
 
    // public
 
+    public Double getAvg(){
+        Double avg = 0.0;
+        Cursor c;
+
+       // c = database.rawQuery("SELECT SUM(" + KEY_PULSERATE + ") as Total FROM " + DATABASE_TABLE + ";",null);
+        c = database.rawQuery("SELECT SUM(" + KEY_PULSERATE + ") as Total, COUNT(*) as TotalCount FROM " + DATABASE_TABLE + ";",null);
+
+        //Cursor c1;
+       // c1 = database.rawQuery("SELECT * FROM " + DATABASE_TABLE + ";",null);
+
+        String result = "";
+        int iRow = c.getColumnIndex("Total");
+        int itc = c.getColumnIndex("TotalCount");
+
+        int y = c.getCount();
+       // int y1 = c1.getCount();
+        if(c.moveToFirst()) {
+            if (c.getCount() < 50 && c.getCount() > 0) {
+                //avg = Double.valueOf(Double.valueOf(c.getInt(0)) / c1.getCount());
+                avg = Double.valueOf(Double.valueOf(c.getInt(iRow)) / c.getInt(itc));
+            } else if (c.getCount() >= 50) {
+                avg = Double.valueOf(Double.valueOf(c.getInt(iRow)) / 50);
+            } else {
+                avg = 0.0;
+            }
+        }
+
+        return avg;
+    }
+
     public LinkedHashMap<String, Integer> getAllData(String from, String to, String str) {
 
         String[] col = new String[]{KEY_ROWID, KEY_PULSERATE, KEY_TIMESTAMP};

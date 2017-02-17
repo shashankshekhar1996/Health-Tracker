@@ -30,12 +30,15 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.StringTokenizer;
 
+import static health.vit.com.healthtracker.R.id.avg;
+
 public class PulseTable extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     private String from;
     private String to;
     private TableLayout tableLayout;
     private TextView textView;
+    private TextView msg;
     private Spinner spinner;
 
     @Override
@@ -57,7 +60,8 @@ public class PulseTable extends AppCompatActivity implements AdapterView.OnItemS
         Intent intent = getIntent();
         from = intent.getStringExtra("from");
         to = intent.getStringExtra("to");
-        textView = (TextView) findViewById(R.id.avg);
+        textView = (TextView) findViewById(avg);
+        msg = (TextView) findViewById(R.id.msg);
         tableLayout = (TableLayout) findViewById(R.id.tabLayout);
         spinner = (Spinner) findViewById(R.id.spinner);
 
@@ -68,8 +72,28 @@ public class PulseTable extends AppCompatActivity implements AdapterView.OnItemS
        // spinner.setBackgroundColor(Color.LTGRAY);
        // spinner.setBackgroundColor(Color.rgb(255,0,0));
         spinner.setOnItemSelectedListener(this);
-
+        getAvg();
         buildTable("DATETIMEASC");
+    }
+
+    private void getAvg(){
+        PulseData pd = new PulseData(PulseTable.this);
+        pd.open();
+        Double avg = pd.getAvg();
+        pd.close();
+        String avgText = String.valueOf(avg);
+        String average = "Your Average Heart rate for last few readings is " + avgText + ".";
+        String message = "";
+
+       // textView.setText("Your Average Heart rate for last few readings is " + result + ".");
+        if(avg>=60 && avg<=100){
+            message += "Your heart rate is in normal range. You have healthy heart rate";
+        }else{
+            message += "Your heart rate is not in normal range. You may be prone to health risks";
+        }
+
+        textView.setText(average);
+        msg.setText(message);
     }
 
     private void buildTable(String str) {

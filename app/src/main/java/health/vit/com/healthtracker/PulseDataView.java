@@ -324,4 +324,14 @@ public class PulseDataView extends AppCompatActivity implements View.OnClickList
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 }

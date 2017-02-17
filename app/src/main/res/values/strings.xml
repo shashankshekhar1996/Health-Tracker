@@ -84,6 +84,8 @@ Asthma need not hinder peak performance in sport. 1% of the US Olympic team were
     <string name="title_activity_data_error">DataError</string>
     <string name="title_activity_health_tips_info">HealthTipsInfo</string>
     <string name="title_health_tips">HealthTips</string>
+    <string name="title_activity_device_list">DeviceList</string>
+    <string name="title_activity_bluetooth">BluetoothActivity</string>
 
 
 </resources>

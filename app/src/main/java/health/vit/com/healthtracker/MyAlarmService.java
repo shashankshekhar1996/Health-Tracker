@@ -55,6 +55,25 @@ public class MyAlarmService extends Service {
         notificationIntent.putExtra("head", healthTipsHeading[number]);
         notificationIntent.putExtra("para", healthTipsPara[number]);
 
+       // notificationIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+
+/*
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+                .setContentTitle("aa")
+                .setContentText("bb")
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setWhen(System.currentTimeMillis());
+
+        Intent nIntent = getPackageManager().
+                getLaunchIntentForPackage("health.vit.com.healthtracker");
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, nIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        notificationBuilder.setContentIntent(pendingIntent);
+
+        startForeground(0,notificationBuilder.build());*/
+
+
 
         //Intent notificationIntent = new Intent(this, HealthTips.class);
         Log.i("NOTIFY","NOTIFIED");
@@ -78,11 +97,14 @@ public class MyAlarmService extends Service {
                 .setTicker("New Message Alert!")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setSound(alarmSound)
+                .setAutoCancel(true)
                 .setContentIntent(pendingIntent).build();
+
+       // notification.flags = Notification.FLAG_ONGOING_EVENT | Notification.FLAG_NO_CLEAR;
+
 
         NotificationManager notificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0, notification);
-
 
     }
 

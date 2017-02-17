@@ -62,11 +62,22 @@
                     android:text="TextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="42dp"
+                    android:textAlignment="center"
+                    android:padding="10dp"
                     android:id="@+id/avg"
                     android:orientation="vertical"
                     android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:padding="10dp"
+                    android:id="@+id/msg"
+                    android:orientation="vertical"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Button" />
             </LinearLayout>
         </LinearLayout>
 

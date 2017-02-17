@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -35,6 +36,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import static android.R.attr.data;
+import static health.vit.com.healthtracker.R.id.avg;
 
 public class PulseRateGraph extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
@@ -44,7 +46,8 @@ public class PulseRateGraph extends AppCompatActivity implements AdapterView.OnI
     private String from;
     private String to;
     private Spinner spinner;
-
+    private TextView textView;
+    private TextView msg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +71,8 @@ public class PulseRateGraph extends AppCompatActivity implements AdapterView.OnI
         getWindowManager().getDefaultDisplay().getSize(size);
         int screenHeight = size.y;
         LinearLayout layout1 = (LinearLayout)findViewById(R.id.layout1);
+        textView = (TextView) findViewById(avg);
+        msg = (TextView) findViewById(R.id.msg);
         ViewGroup.LayoutParams params1 = layout1.getLayoutParams();
         params1.height = screenHeight;// - getStatusBarHeight();
         Intent intent = getIntent();
@@ -81,7 +86,28 @@ public class PulseRateGraph extends AppCompatActivity implements AdapterView.OnI
         // spinner.setBackgroundColor(Color.LTGRAY);
         // spinner.setBackgroundColor(Color.rgb(255,0,0));
         spinner.setOnItemSelectedListener(this);
+        getAvg();
         plotGraph("DATETIMEASC");
+    }
+
+    private void getAvg(){
+        PulseData pd = new PulseData(PulseRateGraph.this);
+        pd.open();
+        Double avg = pd.getAvg();
+        pd.close();
+        String avgText = String.valueOf(avg);
+        String average = "Your Average Heart rate for last few readings is " + avgText + ".";
+        String message = "";
+
+        // textView.setText("Your Average Heart rate for last few readings is " + result + ".");
+        if(avg>=60 && avg<=100){
+            message += "Your heart rate is in normal range. You have healthy heart rate";
+        }else{
+            message += "Your heart rate is not in normal range. You may be prone to health risks";
+        }
+
+        textView.setText(average);
+        msg.setText(message);
     }
 
     private void plotGraph(String str) {
