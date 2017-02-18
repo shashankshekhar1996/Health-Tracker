@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             //Intent i = new Intent("")
-            startActivity(new Intent(MainActivity.this, Reminder.class));
+            startActivity(new Intent(MainActivity.this, HealthTips.class));
             
         } else if (id == R.id.nav_doctors) {
             /** Go to Find Doctors Activity */

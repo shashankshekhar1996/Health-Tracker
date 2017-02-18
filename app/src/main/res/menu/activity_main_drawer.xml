@@ -7,7 +7,7 @@
         <item
             android:id="@+id/nav_camera"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Reminder" />
+            android:title="Health Tips" />
         <item
             android:id="@+id/nav_doctors"
             android:icon="@drawable/ic_menu_gallery"
@@ -15,11 +15,11 @@
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:title="Record Heart Rate" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="View Heart Rate Data" />
     </group>
 
     <group
@@ -33,7 +33,7 @@
         <item
             android:id="@+id/nav_send"
             android:icon="@drawable/ic_menu_send"
-            android:title="Send" />
+            android:title="Send Manual Data" />
 
     </group>
 </menu>
