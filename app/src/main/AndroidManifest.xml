@@ -23,6 +23,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".BlankActivity"
+            android:screenOrientation="portrait"
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -77,6 +78,7 @@
         <activity
             android:name=".HealthTips"
             android:label="@string/title_health_tips"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.HEALTHTIPS" />
@@ -128,6 +130,7 @@
         <activity
             android:name=".PulseDataFetch"
             android:label="@string/title_activity_pulse_data_fetch"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.PULSEDATAFETCH" />
@@ -138,6 +141,7 @@
         <activity
             android:name=".PulseGraph"
             android:label="@string/title_activity_pulse_graph"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.PULSEGRAPH" />
@@ -148,6 +152,7 @@
         <activity
             android:name=".PulseRateGraph"
             android:label="@string/title_activity_pulse_rate_graph"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.PULSERATEGRAPH" />
@@ -158,6 +163,7 @@
         <activity
             android:name=".PulseTable"
             android:label="@string/title_activity_pulse_table"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.DATAERROR" />
@@ -168,6 +174,7 @@
         <activity
             android:name=".DataError"
             android:label="@string/title_activity_data_error"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.DATAERROR" />
@@ -175,12 +182,14 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        android:name=".PreferencesScreen"
+        <activity
+            android:name=".PreferencesScreen"
         android:label="@string/title_activity_preferences"
         android:screenOrientation="portrait" />
         <activity
             android:name=".DeviceList"
             android:label="@string/title_activity_device_list"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
         <intent-filter>
             <action android:name="android.intent.action.DEVICELIST" />
@@ -191,6 +200,7 @@
         <activity
             android:name=".BluetoothActivity"
             android:label="@string/title_activity_bluetooth"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.BLUETOOTHACTIVITY" />
