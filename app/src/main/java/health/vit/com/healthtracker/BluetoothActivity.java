@@ -18,6 +18,7 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 import android.os.Handler;
@@ -79,9 +80,10 @@ public class BluetoothActivity extends AppCompatActivity {
 
                         if (recDataString.charAt(0) == '#')                             //if it starts with # we know it is what we are looking for
                         {
-                            String sensor0 = recDataString.substring(1, 4);             //get sensor value from string between indices 1-5
-                            sensorView0.setText(" Sensor 0 Voltage = " + sensor0 + "V");    //update the textviews with sensor values
-
+                            //String sensor0 = recDataString.substring(1, 4);             //get sensor value from string between indices 1-5
+                            String sensor0 = recDataString.substring(1, dataLength);
+                            sensorView0.setText(" Heart Rate = " + sensor0 + "BPM");    //update the textviews with sensor values
+                            insertDataIntoDb(sensor0);
                         }
                         recDataString.delete(0, recDataString.length());                    //clear all string data
                         // strIncom =" ";
@@ -100,6 +102,18 @@ public class BluetoothActivity extends AppCompatActivity {
 
         return  device.createRfcommSocketToServiceRecord(BTMODULEUUID);
         //creates secure outgoing connecetion with BT device using UUID
+    }
+
+    private void insertDataIntoDb(String pulseRate){
+        PulseData pd = new PulseData(BluetoothActivity.this);
+
+        Log.i("TAG","-------heyyaaaaaaaaaa");
+        pd.open();
+        Timestamp t = new Timestamp(System.currentTimeMillis());
+        String now = String.valueOf(t);
+        pd.createEntry(pulseRate, now);
+        Log.i("TAG","NNNNNNNOOOOOOOOOWWWWWWW------" + now);
+        pd.close();
     }
 
     @Override
