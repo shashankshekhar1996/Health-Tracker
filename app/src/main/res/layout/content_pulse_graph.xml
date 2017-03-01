@@ -5,10 +5,8 @@
     android:id="@+id/content_pulse_graph"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingTop="16dp"
+    android:background="#c0c0c0"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="health.vit.com.healthtracker.PulseGraph"
     tools:showIn="@layout/activity_pulse_graph">
@@ -26,7 +24,7 @@
             android:id="@+id/layout5"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:background="#CAD7DD"
+            android:background="#fff"
             android:padding="5dp"
             android:orientation="vertical">
 
@@ -42,6 +40,8 @@
             android:id="@+id/layout1"
             android:layout_height="match_parent"
             android:layout_width="match_parent"
+            android:background="#fff"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
             android:orientation="vertical"
             >
         <com.github.mikephil.charting.charts.BarChart
@@ -57,6 +57,8 @@
             android:id="@+id/layout2"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
+            android:background="#fff"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:orientation="vertical">
 
             <TextView

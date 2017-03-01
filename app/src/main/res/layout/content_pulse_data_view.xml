@@ -5,10 +5,7 @@
     android:id="@+id/content_pulse_data_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#C0C0C0"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="health.vit.com.healthtracker.PulseDataView"
     tools:showIn="@layout/activity_pulse_data_view">
@@ -17,92 +14,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/layout_1"
-        android:orientation="vertical">
-
-
-
-        <TextView
-            android:id="@+id/heading"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:padding="15dp"
-            android:text="Select From Date and To Date to view the graphical data"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="100"
-            android:padding="8dp">
-
-
-            <TextView
-                android:text="TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/fromDate"
-                android:layout_weight="50"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Button" />
-
-
-            <Button
-                android:text="SELECT FROM DATE"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:id="@+id/fromDateBtn"
-                android:layout_weight="50"
-                android:textColor="#fff"
-                style="@android:style/Widget.Material.Button"
-                android:textAppearance="@style/TextAppearance.AppCompat.Button" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="8dp"
-            android:weightSum="100">
-
-
-            <TextView
-                android:text="TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/toDateBtn"
-                android:layout_alignStart="@+id/fromDate"
-                android:id="@+id/toDate"
-                android:layout_weight="50"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Button" />
-
-
-            <Button
-                android:text="SELECT    TO    DATE"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:id="@+id/toDateBtn"
-                android:layout_weight="50"
-                android:textColor="#fff"
-                style="@android:style/Widget.Material.Button"
-                android:layout_below="@+id/fromDateBtn"
-                android:textAppearance="@style/TextAppearance.AppCompat.Button" />
-        </LinearLayout>
-    </LinearLayout>
-
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_below="@+id/layout_1"
+        android:layout_marginTop="@dimen/appIntroHeadingTextSize"
         android:padding="15dp"
+        android:background="#FFFFFF"
         android:orientation="vertical">
 
         <Button
@@ -112,7 +27,7 @@
             android:background="@color/colorPrimary"
             android:drawableLeft="@drawable/ic_line_chart"
             android:drawableTint="#fff"
-            android:padding="20dp"
+            android:paddingLeft="20dp"
             android:textColor="#fff"
             android:text="Line Chart"
             android:layout_marginBottom="10dp"
@@ -128,7 +43,7 @@
             android:background="@color/colorPrimary"
             android:drawableLeft="@drawable/ic_bar_chart"
             android:drawableTint="#fff"
-            android:padding="20dp"
+            android:paddingLeft="20dp"
             android:textColor="#fff"
             android:layout_marginBottom="10dp"
             android:text="Bar Chart"
@@ -143,17 +58,143 @@
             android:background="@color/colorPrimary"
             android:drawableLeft="@drawable/ic_table"
             android:drawableTint="#fff"
-            android:padding="20dp"
             android:textColor="#fff"
             android:text="Table"
+            android:paddingLeft="20dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:layout_marginBottom="27dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
 
 
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layout_1"
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+        android:layout_marginTop="17dp"
+        android:padding="15dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+
+        <TextView
+            android:id="@+id/heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:padding="10dp"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:text="Select From Date and To Date to view the graphical data"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+
+
+            <TextView
+                android:text="SELECT FROM DATE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:layout_weight="50"
+                android:background="@color/colorPrimary"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button"/>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:weightSum="100">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="70"
+                    android:id="@+id/fromDate"
+                    android:textAlignment="center"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:text="01/01/2202"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Button" />
+
+                <ImageView android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="10"
+                    android:src="@drawable/ic_calendars"
+                    android:paddingTop="8dp"
+                    android:id="@+id/fromDateBtn">
+                    </ImageView>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:weightSum="100">
+
+
+            <TextView
+                android:text="SELECT    TO    DATE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:background="@color/colorPrimary"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button"/>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:weightSum="100">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="70"
+                    android:id="@+id/toDate"
+                    android:textAlignment="center"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                    android:text="01/01/2202" />
+
+                <ImageView android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="10"
+                    android:src="@drawable/ic_calendars"
+                    android:paddingTop="8dp"
+                    android:id="@+id/toDateBtn">
+                </ImageView>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
     </LinearLayout>
 
 
