@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(new Intent(MainActivity.this, FindDoctorActivity.class));
 
         } else if (id == R.id.nav_slideshow) {
-           // startActivity(new Intent(MainActivity.this, DeviceList.class));
+            startActivity(new Intent(MainActivity.this, DeviceList.class));
 
 
         } else if (id == R.id.nav_manage) {
