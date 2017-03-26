@@ -25,6 +25,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -77,6 +79,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private LocationRequest mLocationRequest;
     private Location location;
     private boolean circleSet = false;
+    private LinearLayout ll_seekbar;
+    private SeekBar radius_selector;
+    private String currentLocationString = null;
+    private String radius = "1000";
+    private LatLng currentLocation;
 
     public static Bitmap getBitmapFromVectorDrawable(Context context, int drawableId) {
         Drawable drawable = ContextCompat.getDrawable(context, drawableId);
@@ -99,20 +106,83 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ll_seekbar = (LinearLayout) findViewById(R.id.ll_seekbar);
+        radius_selector = (SeekBar) findViewById(R.id.radius_selector);
+        radius_selector.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                Toast.makeText(MapsActivity.this, "Radius set to " + progress + "kms", Toast.LENGTH_SHORT).show();
+                radius = String.valueOf(progress) + "000"; // in meters
+                googleMap.addMarker(new MarkerOptions().title("My Location").position(currentLocation).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
+                findHospitals(currentLocationString, String.valueOf(radius));
+            }
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                ll_seekbar.setVisibility(View.GONE);
+            }
+        });
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: Zoom level
-                //Toast.makeText(MapsActivity.this, "Zoom in-out", Toast.LENGTH_SHORT).show();
-                turnOnGPS();
+                /** show the seekbar */
+                showSeekBar();
             }
         });
 
         /** Map Init */
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(map);
         mapFragment.getMapAsync(this);
+    }
+
+    private void showSeekBar() {
+        final LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(mLocationRequest);
+
+        PendingResult<LocationSettingsResult> result = LocationServices.SettingsApi.checkLocationSettings(App.getGoogleSignInHelper().getApiClient(), builder.build());
+
+        result.setResultCallback(new ResultCallback<LocationSettingsResult>() {
+            @Override
+            public void onResult(LocationSettingsResult result) {
+                final Status status = result.getStatus();
+                switch (status.getStatusCode()) {
+                    case LocationSettingsStatusCodes.SUCCESS:
+                        /** All location settings are satisfied. The client can initialize location requests here */
+                        Log.i(TAG, "GPS is turned on.");
+                        if (ll_seekbar.getVisibility() == View.GONE) {
+                            ll_seekbar.setVisibility(View.VISIBLE);
+                            ll_seekbar.animate().alpha(1.0f).translationX(0).setDuration(500);
+                        } else {
+                            ll_seekbar.animate().alpha(0.0f).translationX(-ll_seekbar.getWidth()).setDuration(500);
+                            ll_seekbar.setVisibility(View.GONE);
+                        }
+                        currentLocation = new LatLng(getLocation().getLatitude(), getLocation().getLongitude());
+                        currentLocationString = String.valueOf(getLocation().getLatitude()) + "," + String.valueOf(getLocation().getLongitude());
+                        /** Add my location to Maps */
+                        googleMap.addMarker(new MarkerOptions().title("My Location").position(currentLocation).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
+                        break;
+                    case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+                        /** Location settings are not satisfied. But could be fixed by showing the user a dialog.*/
+                        try {
+                            /** Show the dialog by calling startResolutionForResult(),
+                             and check the result in onActivityResult()*/
+                            status.startResolutionForResult(MapsActivity.this, REQUEST_CHECK_SETTINGS);
+                        } catch (IntentSender.SendIntentException e) {
+                            // Ignore the error.
+                        }
+                        break;
+                    case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                        /** Location settings are not satisfied. However, we have no way to fix the
+                         settings so we won't show the dialog.*/
+                        break;
+                }
+            }
+        });
     }
 
     @Override
@@ -144,7 +214,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             map.setBuildingsEnabled(true);
             map.setIndoorEnabled(true);
         }
-
+        turnOnGPS(radius);
     }
 
     @Override
@@ -191,7 +261,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     /** Permission Granted */
                     googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.style_json));
-                    turnOnGPS();
+                    turnOnGPS(radius);
                     return;
 
                 } else {
@@ -235,19 +305,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
      * blue circle to place all markers within the required radius
      */
     private void addBoundary(LatLng currentLocation, double radius) {
-        if (!circleSet) {
-            CircleOptions circleOptions = new CircleOptions();
-            circleOptions.center(currentLocation);
-            circleOptions.strokeColor(Color.argb(200, 255, 100, 0));
-            circleOptions.strokeWidth(4.0f);
-            circleOptions.fillColor(0x550000ff);
-            circleOptions.radius(radius);
-            googleMap.addCircle(circleOptions);
-            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 12));
-        }
+        googleMap.clear();
+        CircleOptions circleOptions = new CircleOptions();
+        circleOptions.center(currentLocation);
+        circleOptions.strokeColor(Color.argb(200, 255, 100, 0));
+        circleOptions.strokeWidth(4.0f);
+        circleOptions.fillColor(0x550000ff);
+        circleOptions.radius(radius);
+        googleMap.addCircle(circleOptions);
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 13));
+
     }
 
-    private void turnOnGPS() {
+    private void turnOnGPS(final String radius) {
         mLocationRequest = LocationRequest.create();
         mLocationRequest.setPriority(LocationRequest.PRIORITY_LOW_POWER);
         final LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(mLocationRequest);
@@ -264,16 +334,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         Log.i(TAG, "GPS is turned on.");
                         if (getLocation() != null) {
                             //Toast.makeText(MapsActivity.this, "Location = " + getLocation().getLatitude() + "," + getLocation().getLongitude(), Toast.LENGTH_SHORT).show();
-                            LatLng currentLocation = new LatLng(getLocation().getLatitude(), getLocation().getLongitude());
-                            String currentLocationString = String.valueOf(getLocation().getLatitude()) + "," + String.valueOf(getLocation().getLongitude());
-                            System.out.println(currentLocationString);
+                            currentLocation = new LatLng(getLocation().getLatitude(), getLocation().getLongitude());
+                            currentLocationString = String.valueOf(getLocation().getLatitude()) + "," + String.valueOf(getLocation().getLongitude());
+                            //System.out.println(currentLocationString);
                             /** Add my location to Maps */
                             googleMap.addMarker(new MarkerOptions().title("My Location").position(currentLocation).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
-                            /** add a radius boundary*/
-                            //TODO add radius progress bar
-                            addBoundary(currentLocation, 5000);
-                            circleSet = true;
-                            findHospitals(currentLocationString, "5000");
+                            findHospitals(currentLocationString, radius);
                         }
                         break;
                     case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
@@ -295,7 +361,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
     }
 
-    private void findHospitals(String currentLocationString, String radius) {
+    private void findHospitals(String currentLocationString, final String radius) {
+        /** add a radius boundary*/
         RequestQueue requestQueue = Volley.newRequestQueue(MapsActivity.this);
         //TODO add location
         String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + currentLocationString + "&radius=" + radius + "&sensor=true&key=" + Constants.MAPS_API_KEY + "&types=hospital";
@@ -305,15 +372,18 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 try {
                     String statusCode = response.getString("status");
                     if (statusCode.equals("OK")) {
+                        addBoundary(currentLocation, Double.valueOf(radius));
                         JSONArray results = response.getJSONArray("results");
                         for (int i = 0; i < results.length(); i++) {
+                            if (i == 12)
+                                break;
                             JSONObject place = results.getJSONObject(i);
                             String place_name = place.getString("name");
                             String place_rating = "N/A";
                             try {
                                 place_rating = place.getString("rating");
                             } catch (JSONException e) {
-                                System.out.println(e.getLocalizedMessage());
+                                //System.out.println(e.getLocalizedMessage());
                             }
                             JSONObject place_geometry = place.getJSONObject("geometry");
                             JSONObject place_location = place_geometry.getJSONObject("location");
