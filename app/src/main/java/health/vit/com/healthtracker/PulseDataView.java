@@ -62,15 +62,8 @@ public class PulseDataView extends AppCompatActivity implements View.OnClickList
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
        // tv = (TextView) findViewById(R.id.textView4);
         //spinner = (Spinner) findViewById(R.id.spinner);
         fromDate = (TextView) findViewById(R.id.fromDate);
@@ -249,6 +242,7 @@ public class PulseDataView extends AppCompatActivity implements View.OnClickList
         return super.onOptionsItemSelected(item);
     }
 
+
     @Override
     public void onClick(View v) {
         Intent intent;
@@ -335,4 +329,6 @@ public class PulseDataView extends AppCompatActivity implements View.OnClickList
     protected void onResume() {
         super.onResume();
     }
+
+
 }

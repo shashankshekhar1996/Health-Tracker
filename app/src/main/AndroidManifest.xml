@@ -91,7 +91,6 @@
             android:excludeFromRecents="true"
             android:label="@string/title_activity_health_tips_info"
             android:launchMode="singleTop"
-            android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"
             android:taskAffinity=""
             android:theme="@style/AppTheme.NoActionBar">
@@ -101,9 +100,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
 
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+
         </activity>
 
         <service

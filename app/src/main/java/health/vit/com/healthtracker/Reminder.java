@@ -28,16 +28,6 @@ public class Reminder extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-
         //Intent myIntent = new Intent(this , NotifyService.class);
         AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
        /* PendingIntent pendingIntent = PendingIntent.getService(this, 0, myIntent, 0);

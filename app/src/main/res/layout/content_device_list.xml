@@ -40,14 +40,17 @@
             android:id="@+id/connecting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
         <TextView
             android:id="@+id/infoText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="If no devices are listed please pair your device in Android settings"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAlignment="center"
+            android:textColor="#000"/>
 
         <LinearLayout
             android:layout_width="match_parent"

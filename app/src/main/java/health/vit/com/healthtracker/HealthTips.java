@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -32,6 +33,8 @@ public class HealthTips extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
        // am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         //setOneTimeAlarm();
@@ -52,6 +55,8 @@ public class HealthTips extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
         //setListAdapter(new ArrayAdapter<String>(HealthTips.this, android.R.layout.i , healthTipsHeading));
 
        /*
@@ -68,6 +73,14 @@ public class HealthTips extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish(); // close this activity and return to preview activity (if there is any)
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 /*
