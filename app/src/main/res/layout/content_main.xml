@@ -41,6 +41,6 @@
         android:visibility="visible"
         app:lottie_autoPlay="false"
         app:lottie_fileName="TwitterHeart.json"
-        app:lottie_loop="true" />
+        app:lottie_loop="true"/>
 
 </RelativeLayout>

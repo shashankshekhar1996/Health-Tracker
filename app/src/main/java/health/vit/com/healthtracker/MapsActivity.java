@@ -113,7 +113,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 Toast.makeText(MapsActivity.this, "Radius set to " + progress + "kms", Toast.LENGTH_SHORT).show();
                 radius = String.valueOf(progress) + "000"; // in meters
-                googleMap.addMarker(new MarkerOptions().title("My Location").position(currentLocation).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
                 findHospitals(currentLocationString, String.valueOf(radius));
             }
 
@@ -189,8 +188,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap map) {
         googleMap = map;
         /** Do everything in else */
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
             /** asking for permissions */
             ActivityCompat.requestPermissions(MapsActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, MY_PERMISSIONS_REQUEST_ACCESS_LOCATION);
@@ -199,9 +197,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             try {
                 // Customise the styling of the base map using a JSON object defined
                 // in a raw resource file.
-                boolean success = map.setMapStyle(
-                        MapStyleOptions.loadRawResourceStyle(
-                                this, R.raw.style_json));
+                boolean success = map.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.style_json));
 
                 if (!success) {
                     Log.e(TAG, "Style parsing failed.");
@@ -213,8 +209,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             map.setMyLocationEnabled(true);
             map.setBuildingsEnabled(true);
             map.setIndoorEnabled(true);
+            turnOnGPS(radius);
         }
-        turnOnGPS(radius);
     }
 
     @Override
@@ -256,8 +252,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_ACCESS_LOCATION: {
                 // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                     /** Permission Granted */
                     googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.style_json));
@@ -284,13 +279,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (item.getItemId() == R.id.action_autocomplete) {
             try {
                 /** Right now,focusing on INDIA */
-                AutocompleteFilter filter = new AutocompleteFilter.Builder()
-                        .setCountry("IN")
-                        .setTypeFilter(AutocompleteFilter.TYPE_FILTER_GEOCODE).build();
+                AutocompleteFilter filter = new AutocompleteFilter.Builder().setCountry("IN").setTypeFilter(AutocompleteFilter.TYPE_FILTER_GEOCODE).build();
 
-                Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY)
-                        .setFilter(filter)
-                        .build(MapsActivity.this);
+                Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY).setFilter(filter).build(MapsActivity.this);
                 startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
             } catch (GooglePlayServicesRepairableException e) {
                 e.printStackTrace();
@@ -362,9 +353,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     private void findHospitals(String currentLocationString, final String radius) {
-        /** add a radius boundary*/
         RequestQueue requestQueue = Volley.newRequestQueue(MapsActivity.this);
-        //TODO add location
         String url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + currentLocationString + "&radius=" + radius + "&sensor=true&key=" + Constants.MAPS_API_KEY + "&types=hospital";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -372,6 +361,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 try {
                     String statusCode = response.getString("status");
                     if (statusCode.equals("OK")) {
+                        /** add a radius boundary*/
                         addBoundary(currentLocation, Double.valueOf(radius));
                         JSONArray results = response.getJSONArray("results");
                         for (int i = 0; i < results.length(); i++) {
@@ -395,6 +385,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     } else {
                         Log.i(TAG, statusCode);
                     }
+                    googleMap.addMarker(new MarkerOptions().title("My Location").position(currentLocation).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

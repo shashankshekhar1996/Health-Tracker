@@ -43,10 +43,7 @@ public class GoogleSignInHelper implements GoogleApiClient.ConnectionCallbacks, 
                 .requestScopes(new Scope(Scopes.PLUS_LOGIN))
                 .build();
         mGoogleApiClient = new GoogleApiClient.Builder(context)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .addApi(Plus.API)
-                .addApi(Places.GEO_DATA_API)
-                .addApi(Places.PLACE_DETECTION_API).addApi(LocationServices.API).addConnectionCallbacks(this).addOnConnectionFailedListener(this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso).addApi(Plus.API).addApi(Places.GEO_DATA_API).addApi(Places.PLACE_DETECTION_API).addApi(LocationServices.API).addConnectionCallbacks(this).addOnConnectionFailedListener(this)
                 .build();
     }
 
