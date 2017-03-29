@@ -23,6 +23,7 @@
         <item name="city">city</item>
         <item name="name">name</item>
     </array>
+    <string name="title_activity_maps">MapsActivity</string>
 
     <string-array name="spin_data">
         <item>Sort By Date and Time (Ascending)</item>

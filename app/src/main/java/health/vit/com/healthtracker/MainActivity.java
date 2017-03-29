@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -79,10 +80,24 @@ public class MainActivity extends AppCompatActivity
         tv_profile_email.setText(App.getInstance().getEMAIL_ADDRESS());
         tv_profile_name.setText(App.getInstance().getUSERNAME());
         downloadProfilePic(App.getInstance().getPROFILE_PIC_URL());
+
+        final LottieAnimationView heart = (LottieAnimationView) findViewById(R.id.animation_view);
+        heart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (heart.isAnimating()) {
+                    heart.pauseAnimation();
+                } else {
+                    heart.playAnimation();
+                }
+            }
+        });
     }
 
 
     private void downloadProfilePic(String url) {
+
+        System.out.println(App.getInstance().getPROFILE_PIC_URL());
 
         Picasso.with(MainActivity.this).load(url).fit().placeholder(R.drawable.ic_person).error(R.drawable.ic_person)
                 .into(iv_profile_pic, new Callback() {
@@ -95,7 +110,7 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onError() {
-                System.out.println("Loaded from cache");
+                System.out.println("Could not fetch");
             }
         });
     }
@@ -142,7 +157,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             //Intent i = new Intent("")
             startActivity(new Intent(MainActivity.this, HealthTips.class));
-            
+
         } else if (id == R.id.nav_doctors) {
             /** Go to Find Doctors Activity */
             startActivity(new Intent(MainActivity.this, FindDoctorActivity.class));
@@ -154,6 +169,10 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_manage) {
             startActivity(new Intent(MainActivity.this, PulseDataView.class));
 
+
+        } else if (id == R.id.nav_maps) {
+            /** Maps Activity*/
+            startActivity(new Intent(MainActivity.this, MapsActivity.class));
 
         } else if (id == R.id.nav_settings) {
             /** Preferences Screen */

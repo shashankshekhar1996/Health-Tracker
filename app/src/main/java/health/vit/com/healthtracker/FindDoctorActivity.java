@@ -201,7 +201,7 @@ public class FindDoctorActivity extends AppCompatActivity implements SearchView.
             dialog.show();
         }
 
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
     @Override

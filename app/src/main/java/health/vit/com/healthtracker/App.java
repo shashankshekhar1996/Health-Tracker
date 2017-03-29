@@ -38,6 +38,7 @@ public class App extends Application {
         e = getPrefs.edit();
         setEMAIL_ADDRESS(getPrefs.getString(Constants.PREFS_PROFILE_EMAIL, getResources().getString(R.string.default_email)));
         setUSERNAME(getPrefs.getString(Constants.PREFS_PROFILE_USERNAME, getResources().getString(R.string.default_username)));
+        setPROFILE_PIC_URL(getPrefs.getString(Constants.PREFS_PROFILE_PIC_URL,null));
     }
 
     public String getEMAIL_ADDRESS() {
@@ -57,6 +58,8 @@ public class App extends Application {
 
     public void setPROFILE_PIC_URL(String PROFILE_PIC_URL) {
         this.PROFILE_PIC_URL = PROFILE_PIC_URL;
+        e.putString(Constants.PREFS_PROFILE_PIC_URL, PROFILE_PIC_URL);
+        e.apply();
     }
 
     public GoogleSignInHelper getGoogleSignInHelperInstance() {
