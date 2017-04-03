@@ -61,6 +61,8 @@ public class BluetoothActivity extends AppCompatActivity  implements View.OnClic
 
         btnStart.setOnClickListener(this);
         btnStop.setOnClickListener(this);
+        btnStart.setEnabled(true);
+        btnStop.setEnabled(false);
     }
 
     private void startBluetooth(){
@@ -177,6 +179,8 @@ public class BluetoothActivity extends AppCompatActivity  implements View.OnClic
             btSocket.close();
         } catch (IOException e2) {
             //insert code to deal with this
+        } catch (Exception e){
+
         }
     }
 
@@ -205,13 +209,19 @@ public class BluetoothActivity extends AppCompatActivity  implements View.OnClic
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.startBtn){
+            btnStart.setEnabled(false);
+            btnStop.setEnabled(true);
             startBluetooth();
         }
         if(v.getId() == R.id.stopBtn){
             try{
+                btnStop.setEnabled(false);
+                btnStart.setEnabled(true);
                 btSocket.close();
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (Exception e1){
+                e1.printStackTrace();
             }
         }
     }
