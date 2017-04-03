@@ -121,6 +121,16 @@
             </intent-filter>
         </service>
 
+        <service
+            android:name=".MyAlertService"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.media.action.DISPLAY_NOTIFICATION" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
+
         <receiver
             android:name=".AlarmTime"
             android:enabled="true"

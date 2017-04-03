@@ -38,8 +38,35 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="196dp"
-        android:text="Sensor 0 Voltage = ????"
+        android:text="Heart Rate = ????"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sensorView0"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:weightSum="100">
+
+        <Button
+            android:text="Start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/startBtn"
+            android:layout_weight="50"
+            />
+        <Button
+            android:text="Stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/stopBtn"
+            android:layout_weight="50"
+            />
+
+
+
+
+    </LinearLayout>
 
 
 </RelativeLayout>

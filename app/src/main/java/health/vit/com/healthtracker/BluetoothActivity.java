@@ -26,9 +26,9 @@ import java.util.UUID;
 
 import android.os.Handler;
 
-public class BluetoothActivity extends AppCompatActivity {
+public class BluetoothActivity extends AppCompatActivity  implements View.OnClickListener{
 
-    Button btnOn, btnOff;
+    Button btnStart, btnStop, btnOn, btnOff;
     TextView txtArduino, txtString, txtStringLength, sensorView0, sensorView1, sensorView2, sensorView3;
     Handler bluetoothIn;
     final int handlerState = 0;                        //used to identify handler message
@@ -56,6 +56,15 @@ public class BluetoothActivity extends AppCompatActivity {
         txtString = (TextView) findViewById(R.id.txtString);
         txtStringLength = (TextView) findViewById(R.id.testView1);
         sensorView0 = (TextView) findViewById(R.id.sensorView0);
+        btnStart = (Button) findViewById(R.id.startBtn);
+        btnStop = (Button) findViewById(R.id.stopBtn);
+
+        btnStart.setOnClickListener(this);
+        btnStop.setOnClickListener(this);
+    }
+
+    private void startBluetooth(){
+
         Log.i("TAG","-------hey");
         bluetoothIn = new Handler() {
             public void handleMessage(android.os.Message msg) {
@@ -70,9 +79,9 @@ public class BluetoothActivity extends AppCompatActivity {
                     int endOfLineIndex = recDataString.indexOf("~");                    // determine the end-of-line
                     if (endOfLineIndex > 0) {                                           // make sure there data before ~
                         String dataInPrint = recDataString.substring(0, endOfLineIndex);    // extract string
-                        txtString.setText("Data Received = " + dataInPrint);
+                        //txtString.setText("Data Received = " + dataInPrint);
                         int dataLength = dataInPrint.length();                          //get length of data received
-                        txtStringLength.setText("String Length = " + String.valueOf(dataLength));
+                        //txtStringLength.setText("String Length = " + String.valueOf(dataLength));
 
                         if (recDataString.charAt(0) == '#')                             //if it starts with # we know it is what we are looking for
                         {
@@ -92,29 +101,8 @@ public class BluetoothActivity extends AppCompatActivity {
         btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
         checkBTState();
 
-    }
 
-    private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
 
-        return  device.createRfcommSocketToServiceRecord(BTMODULEUUID);
-        //creates secure outgoing connecetion with BT device using UUID
-    }
-
-    private void insertDataIntoDb(String pulseRate){
-        PulseData pd = new PulseData(BluetoothActivity.this);
-
-        Log.i("TAG","-------heyyaaaaaaaaaa");
-        pd.open();
-        Timestamp t = new Timestamp(System.currentTimeMillis());
-        String now = String.valueOf(t);
-        pd.createEntry(pulseRate, now);
-        Log.i("TAG","NNNNNNNOOOOOOOOOWWWWWWW------" + now);
-        pd.close();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
 
         //Get MAC address from DeviceListActivity via intent
         Intent intent = getIntent();
@@ -149,7 +137,35 @@ public class BluetoothActivity extends AppCompatActivity {
         //I send a character when resuming.beginning transmission to check device is connected
         //If it is not an exception will be thrown in the write method and finish() will be called
         mConnectedThread.write("x");
+
+
+
     }
+
+    private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
+
+        return  device.createRfcommSocketToServiceRecord(BTMODULEUUID);
+        //creates secure outgoing connecetion with BT device using UUID
+    }
+
+    private void insertDataIntoDb(String pulseRate){
+        PulseData pd = new PulseData(BluetoothActivity.this);
+
+        Log.i("TAG","-------heyyaaaaaaaaaa");
+        pd.open();
+        Timestamp t = new Timestamp(System.currentTimeMillis());
+        String now = String.valueOf(t);
+        pd.createEntry(pulseRate, now);
+        Log.i("TAG","NNNNNNNOOOOOOOOOWWWWWWW------" + now);
+        pd.close();
+    }
+
+   /* @Override
+    public void onResume() {
+        super.onResume();
+
+
+    }*/
 
     @Override
     public void onPause()
@@ -186,6 +202,19 @@ public class BluetoothActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.startBtn){
+            startBluetooth();
+        }
+        if(v.getId() == R.id.stopBtn){
+            try{
+                btSocket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 
     //create new class for connect thread
