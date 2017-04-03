@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="196dp"
-        android:text="Sensor 0 Voltage = ????"
+        android:text="Heart Rate = ????"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 

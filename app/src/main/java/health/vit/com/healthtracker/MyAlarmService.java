@@ -16,6 +16,8 @@ import android.util.Log;
 
 import java.util.Random;
 
+import static health.vit.com.healthtracker.R.id.msg;
+
 /**
  * Created by shashankshekhar on 24/01/17.
  */
@@ -55,7 +57,9 @@ public class MyAlarmService extends Service {
         notificationIntent.putExtra("head", healthTipsHeading[number]);
         notificationIntent.putExtra("para", healthTipsPara[number]);
 
-       // notificationIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+        Intent notificationIntent1 = new Intent(MyAlarmService.this, FindDoctorActivity.class);
+        // notificationIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
 
 /*
@@ -90,8 +94,6 @@ public class MyAlarmService extends Service {
 
 
 
-
-
         Notification notification = builder.setContentTitle(healthTipsHeading[number])
                 .setContentText(healthTipsPara[number])
                 .setTicker("New Message Alert!")
@@ -100,11 +102,41 @@ public class MyAlarmService extends Service {
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent).build();
 
-       // notification.flags = Notification.FLAG_ONGOING_EVENT | Notification.FLAG_NO_CLEAR;
+        // notification.flags = Notification.FLAG_ONGOING_EVENT | Notification.FLAG_NO_CLEAR;
+
+        //////
+        Double avg = getAvg();
+        Log.i("NOTIFY", String.valueOf(avg));
+        if(avg < 60 || avg > 100){
+            Log.i("NOTIFYing", String.valueOf(avg));
+            TaskStackBuilder stackBuilder1 = TaskStackBuilder.create(this);
+            stackBuilder1.addParentStack(MainActivity.class);
+            stackBuilder1.addNextIntent(notificationIntent1);
+
+            PendingIntent pendingIntent1 = stackBuilder1.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+            NotificationCompat.Builder builder1 = new NotificationCompat.Builder(this);
+            Uri alarmSound1 = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+            //builder.setSound(alarmSound);
+
+            Notification notification1 = builder.setContentTitle("Health Risk Detected! Consult Doctor!")
+                    .setContentText("Heart Rate : " + String.valueOf(avg) + " (Not in Normal Range)")
+                    .setTicker("New Message Alert!")
+                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setSound(alarmSound)
+                    .setAutoCancel(true)
+                    .setContentIntent(pendingIntent1).build();
+            NotificationManager notificationManager1 = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager1.notify(0, notification1);
+        }else{
+
+        }
+        /////
 
 
         NotificationManager notificationManager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0, notification);
+        notificationManager.notify(1, notification);
 
     }
 
@@ -113,6 +145,15 @@ public class MyAlarmService extends Service {
     {
         // TODO Auto-generated method stub
         super.onDestroy();
+    }
+
+    private Double getAvg(){
+        PulseData pd = new PulseData(MyAlarmService.this);
+        pd.open();
+        Double avg = pd.getAvg();
+        pd.close();
+        return avg;
+
     }
 
 
