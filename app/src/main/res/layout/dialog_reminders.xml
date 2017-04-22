@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/tv_dialog_reminders_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="Enter Title"
+        android:textSize="22sp"/>
+
+    <EditText
+        android:id="@+id/tv_dialog_reminders_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="top|left"
+        android:hint="Enter Description"
+        android:lines="3"
+        android:minLines="3"
+        android:textSize="18sp"/>
+</LinearLayout>

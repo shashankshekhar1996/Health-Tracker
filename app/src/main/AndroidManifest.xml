@@ -55,7 +55,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Reminder"
+            android:name=".ReminderActivity"
             android:label="@string/title_activity_reminder"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />

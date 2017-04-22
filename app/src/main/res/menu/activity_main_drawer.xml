@@ -9,6 +9,10 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="Health Tips" />
         <item
+            android:id="@+id/nav_reminders"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Reminders"/>
+        <item
             android:id="@+id/nav_doctors"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Find Doctors" />
