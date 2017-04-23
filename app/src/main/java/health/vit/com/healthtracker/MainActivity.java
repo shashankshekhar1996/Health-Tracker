@@ -59,11 +59,18 @@ public class MainActivity extends AppCompatActivity
         Intent notificationIntent = new Intent("android.media.action.DISPLAY_NOTIFICATION");
         notificationIntent.addCategory("android.intent.category.DEFAULT");
 
+
+        Intent reminderIntent = new Intent("android.intent.action.REMINDERACTIVITY");
+        notificationIntent.addCategory("android.intent.category.DEFAULT");
+
         PendingIntent broadcast = PendingIntent.getBroadcast(this, 100, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent reminderBroadcast = PendingIntent.getBroadcast(this, 101, reminderIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.SECOND, 0);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),14400000, broadcast);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 9000000, reminderBroadcast);
+
         Log.i("Here","mainactivity");
 
 

@@ -7,36 +7,82 @@ import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+
+import java.util.List;
+import java.util.Random;
+
+import health.vit.com.healthtracker.models.Reminder;
+import health.vit.com.healthtracker.utilities.RemindersDbHelper;
 
 public class AlarmTime extends BroadcastReceiver{
 
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        Intent service1 = new Intent(context, MyAlarmService.class);
-        context.startService(service1);
+        System.out.println("Receiver" + intent.getAction());
+        List<Reminder> reminderList = RemindersDbHelper.getInstance(context.getApplicationContext()).getAllReminders();
 
-        //////////
-        /*Intent notificationIntent = new Intent(context, HealthTips.class);
-        Log.i("NOTIFY","NOTIFIED");
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-        stackBuilder.addParentStack(HealthTips.class);
-        stackBuilder.addNextIntent(notificationIntent);
+        if (intent.getAction().equals("android.intent.action.REMINDERACTIVITY")) {
+            if (!reminderList.isEmpty()) {
+                Random rand = new Random();
+                int number = rand.nextInt(reminderList.size() - 1);
+                Reminder reminder = reminderList.get(number);
+                String notifTitle = reminder.getTitle();
+                String notifDesc = reminder.getDesc();
+                Log.i("NOTIFY", "NOTIFIED");
+                Intent notificationIntent = new Intent(context, ReminderActivity.class);
+                TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+                stackBuilder.addParentStack(MainActivity.class);
+                stackBuilder.addNextIntent(notificationIntent);
 
-        PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+                Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
-        Notification notification = builder.setContentTitle("Demo App Notification")
-                .setContentText("New Notification From Demo App..")
-                .setTicker("New Message Alert!")
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentIntent(pendingIntent).build();
+                Notification notification = builder.setContentTitle("You have Reminders").setContentText(notifTitle).setContentInfo(notifDesc).setSmallIcon(R.mipmap.ic_launcher).setContentIntent(pendingIntent).setSound(alarmSound).setAutoCancel(true).build();
 
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0, notification);*/
+                NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                notificationManager.notify(3, notification);
+            }
+        } else {
+            /*Intent service1 = new Intent(context, MyAlarmService.class);
+            service1.setAction(intent.getAction());
+            context.startService(service1);*/
+
+            String[] healthTipsHeading = {};
+            String[] healthTipsPara = {};
+
+            healthTipsHeading = context.getResources().getStringArray(R.array.heading);
+            healthTipsPara = context.getResources().getStringArray(R.array.paras);
+
+            Random rand = new Random();
+            int number = rand.nextInt(15);
+
+            Intent notificationIntent = new Intent(context, HealthTipsInfo.class);
+            notificationIntent.putExtra("head", healthTipsHeading[number]);
+            notificationIntent.putExtra("para", healthTipsPara[number]);
+
+            Log.i("NOTIFY", "NOTIFIED");
+            TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+            stackBuilder.addParentStack(HealthTips.class);
+            stackBuilder.addNextIntent(notificationIntent);
+
+            PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+            Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+
+            Notification notification = builder.setContentTitle(healthTipsHeading[number]).setContentText(healthTipsPara[number]).setTicker("New Message Alert!").setSmallIcon(R.mipmap.ic_launcher).setSound(alarmSound).setAutoCancel(true).setContentIntent(pendingIntent).build();
+
+            NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.notify(0, notification);
+        }
     }
 
 }

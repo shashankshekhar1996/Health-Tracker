@@ -58,7 +58,13 @@
             android:name=".ReminderActivity"
             android:label="@string/title_activity_reminder"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.REMINDERACTIVITY"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
         <activity
             android:name=".PulseDataView"
             android:label="@string/title_activity_pulse_data_view"
@@ -129,6 +135,11 @@
                 <action android:name="android.media.action.DISPLAY_NOTIFICATION" />
 
                 <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.REMINDERACTIVITY"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </receiver>
 
