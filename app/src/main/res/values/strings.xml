@@ -6,7 +6,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_reminder">Reminder</string>
-    <string name="title_activity_pulse_data_view">PulseDataView</string>
+    <string name="title_activity_pulse_data_view">View Heart Rate Data</string>
     <string name="title_activity_find_doctor">FindDoctorActivity</string>
     <string name="title_activity_preferences">Preferences</string>
     <string name="app_intro">Intro Activity</string>
@@ -79,14 +79,14 @@ Asthma need not hinder peak performance in sport. 1% of the US Olympic team were
 
     </string-array>
     <string name="title_activity_pulse_data_fetch">PulseDataFetch</string>
-    <string name="title_activity_pulse_graph">PulseGraph</string>
-    <string name="title_activity_pulse_rate_graph">PulseRateGraph</string>
-    <string name="title_activity_pulse_table">PulseTable</string>
-    <string name="title_activity_data_error">DataError</string>
-    <string name="title_activity_health_tips_info">HealthTipsInfo</string>
-    <string name="title_health_tips">HealthTips</string>
-    <string name="title_activity_device_list">DeviceList</string>
-    <string name="title_activity_bluetooth">BluetoothActivity</string>
+    <string name="title_activity_pulse_graph">Bar Chart</string>
+    <string name="title_activity_pulse_rate_graph">Line Chart</string>
+    <string name="title_activity_pulse_table">Tabular Data</string>
+    <string name="title_activity_data_error">Data Error</string>
+    <string name="title_activity_health_tips_info">Health Tip</string>
+    <string name="title_health_tips">Health Tips</string>
+    <string name="title_activity_device_list">Device List</string>
+    <string name="title_activity_bluetooth">Record Heart Rate</string>
 
 
 </resources>
