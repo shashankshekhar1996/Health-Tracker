@@ -13,11 +13,14 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import static android.R.attr.order;
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
+import static health.vit.com.healthtracker.R.id.map;
 
 /**
  * Created by shashankshekhar on 22/01/17.
@@ -112,6 +115,63 @@ public class PulseData {
         return result;
     }
 
+
+//    public Map<String,Map<String, Integer>>getMinData(){
+//        Map<String,Map<String, Integer>> map = new HashMap<>();
+//
+//        Cursor c;
+//        Cursor maxC, minC;
+//        c = database.rawQuery("SELECT * FROM " + DATABASE_TABLE +  " ORDER BY " + KEY_ROWID + " DESC LIMIT 4;" , null);
+//
+//        String result = "";
+//        int iRow = c.getColumnIndex(KEY_ROWID);
+//        int iPulserate = c.getColumnIndex(KEY_PULSERATE);
+//        int iTime = c.getColumnIndex(KEY_TIMESTAMP);
+//
+//        Integer max = -999, min = 100000;
+//        if(c.moveToFirst()){
+//            minC = c;
+//            maxC = c;
+//        }else{
+//            minC = null;
+//            maxC = null;
+//        }
+//
+//
+//        for(c.moveToFirst(); !c.isAfterLast(); c.moveToNext()){
+//
+//            Integer pulseRate = c.getInt(iPulserate);
+//
+//            if(pulseRate > max){
+//                max = pulseRate;
+//                maxC = c;
+//            }
+//
+//            if(pulseRate < min){
+//                min = pulseRate;
+//                minC = c;
+//            }
+//
+//        }
+//
+//        if(minC!=null && maxC!=null) {
+//            Map<String, Integer> minMap = new HashMap<>();
+//            minMap.put(minC.getString(iTime), minC.getInt(iPulserate));
+//
+//            map.put("MIN", minMap);
+//
+//            Map<String, Integer> maxMap = new HashMap<>();
+//            maxMap.put(maxC.getString(iTime), maxC.getInt(iPulserate));
+//            map.put("MAX", maxMap);
+//
+//            return map;
+//        }else{
+//            return null;
+//        }
+//
+//
+//    }
+
    // public
 
     public Double getAvg(){
@@ -143,6 +203,36 @@ public class PulseData {
 
         return avg;
     }
+
+//    public Double getAvg(){
+//        Double avg = 0.0;
+//        Cursor c,c1;
+//
+//        //c = database.rawQuery("SELECT SUM(" + KEY_PULSERATE + ") as Total, COUNT(*) as TotalCount FROM " + DATABASE_TABLE + ";",null);
+//        c = database.rawQuery("SELECT * FROM " + DATABASE_TABLE + " ORDER BY " + KEY_ROWID + " DESC LIMIT 4;",null);
+//        c1 = database.rawQuery("SELECT COUNT(*) as TotalCount FROM " + DATABASE_TABLE, null);
+//
+//        String result = "";
+//        int iRow = c.getColumnIndex(KEY_PULSERATE);
+//        int itc = c1.getColumnIndex("TotalCount");
+//        Integer count = c1.getInt(itc);
+//        Integer sum = 0;
+//
+//
+//        for(c.moveToFirst(); !c.isAfterLast(); c.moveToNext()){
+//            sum = sum + c.getInt(iRow);
+//        }
+//
+//        if(count < 50 && count > 0){
+//            avg = Double.valueOf(sum)/count;
+//        }else if(count == 50){
+//            avg = Double.valueOf(sum)/50;
+//        }else{
+//            avg = 0.0;
+//        }
+//
+//        return avg;
+//    }
 
     public LinkedHashMap<String, Integer> getAllData(String from, String to, String str) {
 
