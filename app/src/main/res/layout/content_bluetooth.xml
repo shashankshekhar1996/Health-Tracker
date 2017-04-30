@@ -37,33 +37,55 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="196dp"
-        android:text="Heart Rate = ????"
+        android:layout_marginTop="260dp"
+        android:textColor="#000"
+        android:text="Heart Rate = 72 BPM"
+        android:textStyle="bold"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="44dp"
+        android:src="@drawable/ic_heart_red"
+        android:id="@+id/imageView"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:weightSum="60"
+        android:id="@+id/linearLayout"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="19dp"
         android:layout_below="@+id/sensorView0"
-        android:layout_margin="@dimen/activity_horizontal_margin"
-        android:weightSum="100">
+        android:layout_centerHorizontal="true">
 
         <Button
             android:text="Start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/startBtn"
-            android:layout_weight="50"
+            android:layout_weight="28"
+            android:background="@color/colorPrimary"
+            android:textColor="#fff"
             />
+
+
+
         <Button
             android:text="Stop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/stopBtn"
-            android:layout_weight="50"
+            android:layout_weight="25"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/button_back"
+            android:textColor="#fff"
             />
-
-
 
 
     </LinearLayout>
