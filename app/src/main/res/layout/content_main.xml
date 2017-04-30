@@ -6,41 +6,149 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#B1455A64"
-                android:paddingBottom="@dimen/activity_vertical_margin"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/activity_vertical_margin"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 tools:context="health.vit.com.healthtracker.MainActivity"
                 tools:showIn="@layout/app_bar_main">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="175dp"
-        android:src="@drawable/ic_heart"
-        android:visibility="gone"/>
-
     <TextView
+        android:id="@+id/welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
-        android:text="Welcome :)"
+        android:layout_marginTop="30dp"
+        android:drawablePadding="10dp"
+        android:drawableTint="#fff"
+        android:text="Stay Healthy,\n\t\t\t\tStay Fit !"
         android:textColor="#fff"
-        android:textSize="28dp" />
+        android:textSize="24dp"/>
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/animation_view"
+    <RelativeLayout
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_below="@+id/welcome"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/empty_circle">
+
+        <TextView
+            android:id="@+id/tv_heart_rate_avg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="72"
+            android:textColor="#fff"
+            android:textSize="32sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tv_heart_rate_avg"
+            android:layout_centerInParent="true"
+            android:alpha="0.7"
+            android:text="Average"
+            android:textColor="#fff"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_heart_rate_avg"
+            android:layout_centerHorizontal="true"
+            android:alpha="0.5"
+            android:text="BPM"
+            android:textColor="#fff"
+            android:textSize="16sp"/>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/frame_stats"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:clickable="true"
-        android:visibility="visible"
-        app:lottie_autoPlay="false"
-        app:lottie_fileName="TwitterHeart.json"
-        app:lottie_loop="true"/>
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#fff"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:paddingTop="20dp"
+            android:text="Show Statistics"
+            android:textColor="#a348e4"
+            android:textSize="20sp"/>
+    </FrameLayout>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_above="@+id/frame_stats"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="3dp">
+
+        <android.support.percent.PercentRelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/tv_min"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_widthPercent="50%">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    android:text="Min"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:drawableLeft="@drawable/ic_heart_min"
+                    android:drawablePadding="8dp"
+                    android:paddingTop="15dp"
+                    android:text="51"
+                    android:textColor="#000"
+                    android:textSize="24sp"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/tv_max"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                app:layout_widthPercent="50%">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    android:text="Max"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:drawableLeft="@drawable/ic_heart_max"
+                    android:drawablePadding="8dp"
+                    android:paddingTop="15dp"
+                    android:text="130"
+                    android:textColor="#000"
+                    android:textSize="24sp"/>
+            </RelativeLayout>
+        </android.support.percent.PercentRelativeLayout>
+    </android.support.v7.widget.CardView>
+
 
 </RelativeLayout>

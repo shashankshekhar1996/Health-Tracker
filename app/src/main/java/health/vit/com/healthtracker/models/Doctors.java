@@ -25,17 +25,19 @@ public class Doctors implements Parcelable {
     private String phone;
     private String city;
     private String address;
+    private String timings;
 
     public Doctors() {
     }
 
-    public Doctors(Integer id, String name, String desc, String phone, String city, String address) {
+    public Doctors(Integer id, String name, String desc, String phone, String city, String address, String timings) {
         this.id = id;
         this.name = name;
         this.desc = desc;
         this.phone = phone;
         this.city = city;
         this.address = address;
+        this.timings = timings;
     }
 
     protected Doctors(Parcel in) {
@@ -45,6 +47,7 @@ public class Doctors implements Parcelable {
         this.phone = in.readString();
         this.city = in.readString();
         this.address = in.readString();
+        this.timings = in.readString();
     }
 
     public String getDesc() {
@@ -95,6 +98,15 @@ public class Doctors implements Parcelable {
         this.name = name;
     }
 
+
+    public String getTimings() {
+        return timings;
+    }
+
+    public void setTimings(String timings) {
+        this.timings = timings;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -107,5 +119,6 @@ public class Doctors implements Parcelable {
         dest.writeString(this.phone);
         dest.writeString(this.city);
         dest.writeString(this.address);
+        dest.writeString(this.timings);
     }
 }

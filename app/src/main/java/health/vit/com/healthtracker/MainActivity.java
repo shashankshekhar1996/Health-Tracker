@@ -17,7 +17,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.airbnb.lottie.LottieAnimationView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -87,7 +86,7 @@ public class MainActivity extends AppCompatActivity
         tv_profile_name.setText(App.getInstance().getUSERNAME());
         downloadProfilePic(App.getInstance().getPROFILE_PIC_URL());
 
-        final LottieAnimationView heart = (LottieAnimationView) findViewById(R.id.animation_view);
+        /*final LottieAnimationView heart = (LottieAnimationView) findViewById(R.id.animation_view);
         heart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,7 +96,7 @@ public class MainActivity extends AppCompatActivity
                     heart.playAnimation();
                 }
             }
-        });
+        });*/
     }
 
 

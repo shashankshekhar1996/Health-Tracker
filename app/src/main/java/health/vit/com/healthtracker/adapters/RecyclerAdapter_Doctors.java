@@ -51,6 +51,7 @@ public class RecyclerAdapter_Doctors extends RecyclerView.Adapter<RecyclerAdapte
         holder.tv_phone.setText(doctors_arraylist.get(position).getPhone());
         holder.tv_city.setText(doctors_arraylist.get(position).getCity());
         holder.tv_address.setText(doctors_arraylist.get(position).getAddress());
+        holder.tv_timings.setText(doctors_arraylist.get(position).getTimings());
     }
 
     @Override
@@ -59,7 +60,7 @@ public class RecyclerAdapter_Doctors extends RecyclerView.Adapter<RecyclerAdapte
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tv_name, tv_phone, tv_city, tv_address, tv_desc;
+        private TextView tv_name, tv_phone, tv_city, tv_address, tv_desc, tv_timings;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -68,6 +69,7 @@ public class RecyclerAdapter_Doctors extends RecyclerView.Adapter<RecyclerAdapte
             tv_phone = (TextView) itemView.findViewById(R.id.tv_phone);
             tv_city = (TextView) itemView.findViewById(R.id.tv_city);
             tv_address = (TextView) itemView.findViewById(R.id.tv_address);
+            tv_timings = (TextView) itemView.findViewById(R.id.tv_timings);
         }
     }
 

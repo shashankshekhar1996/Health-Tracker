@@ -29,7 +29,10 @@ public class AlarmTime extends BroadcastReceiver{
         if (intent.getAction().equals("android.intent.action.REMINDERACTIVITY")) {
             if (!reminderList.isEmpty()) {
                 Random rand = new Random();
-                int number = rand.nextInt(reminderList.size() - 1);
+                int number = 0;
+                if (reminderList.size() != 1) {
+                    number = rand.nextInt(reminderList.size() - 1);
+                }
                 Reminder reminder = reminderList.get(number);
                 String notifTitle = reminder.getTitle();
                 String notifDesc = reminder.getDesc();

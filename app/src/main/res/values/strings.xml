@@ -5,9 +5,9 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
-    <string name="title_activity_reminder">Reminder</string>
+    <string name="title_activity_reminder">Reminders</string>
     <string name="title_activity_pulse_data_view">PulseDataView</string>
-    <string name="title_activity_find_doctor">FindDoctorActivity</string>
+    <string name="title_activity_find_doctor">Find Doctors</string>
     <string name="title_activity_preferences">Preferences</string>
     <string name="app_intro">Intro Activity</string>
     <string name="title_activity_google_in">Google SignIn</string>

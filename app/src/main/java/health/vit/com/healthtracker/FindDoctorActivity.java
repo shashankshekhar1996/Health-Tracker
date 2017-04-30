@@ -105,8 +105,7 @@ public class FindDoctorActivity extends AppCompatActivity implements SearchView.
                         String doctor_name = obj.get("name").toString();
                         Log.i("MESSAGE", doctor_name);
                         doctor = new Doctors(Integer.valueOf(obj.get("id").toString()),
-                                obj.get("name").toString(), obj.get("description").toString(), obj.get("phone").toString(),
-                                obj.get("city").toString(), obj.get("address").toString());
+                                obj.get("name").toString(), obj.get("description").toString(), obj.get("phone").toString(), obj.get("city").toString(), obj.get("address").toString(), obj.get("timings").toString());
                         doctors_list.add(doctor);
                     }
                 } catch (JSONException e) {
@@ -143,8 +142,7 @@ public class FindDoctorActivity extends AppCompatActivity implements SearchView.
                         String doctor_name = obj.get("name").toString();
                         Log.i("MESSAGE", doctor_name);
                         doctor = new Doctors(Integer.valueOf(obj.get("id").toString()),
-                                obj.get("name").toString(), obj.get("description").toString(), obj.get("phone").toString(),
-                                obj.get("city").toString(), obj.get("address").toString());
+                                obj.get("name").toString(), obj.get("description").toString(), obj.get("phone").toString(), obj.get("city").toString(), obj.get("address").toString(), obj.get("timings").toString());
                         doctors_list.add(doctor);
                     }
                 } catch (JSONException e) {
