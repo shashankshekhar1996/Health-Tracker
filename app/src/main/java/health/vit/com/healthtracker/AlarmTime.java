@@ -50,7 +50,7 @@ public class AlarmTime extends BroadcastReceiver{
                 Notification notification = builder.setContentTitle("You have Reminders").setContentText(notifTitle).setContentInfo(notifDesc).setSmallIcon(R.mipmap.ic_launcher).setContentIntent(pendingIntent).setSound(alarmSound).setAutoCancel(true).build();
 
                 NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-                notificationManager.notify(3, notification);
+                notificationManager.notify(2, notification);
             }
         } else {
             /*Intent service1 = new Intent(context, MyAlarmService.class);
@@ -85,7 +85,35 @@ public class AlarmTime extends BroadcastReceiver{
 
             NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.notify(0, notification);
+
+            Intent notificationIntent1 = new Intent(context, FindDoctorActivity.class);
+            Double avg = getAvg(context);
+            Log.i("NOTIFY", String.valueOf(avg));
+            if (avg < 60 || avg > 100) {
+                Log.i("NOTIFYing", String.valueOf(avg));
+                TaskStackBuilder stackBuilder1 = TaskStackBuilder.create(context);
+                stackBuilder1.addParentStack(MainActivity.class);
+                stackBuilder1.addNextIntent(notificationIntent1);
+
+                PendingIntent pendingIntent1 = stackBuilder1.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                Notification notification1 = builder.setContentTitle("Health Risk Detected! Consult Doctor!").setContentText("Heart Rate : " + String.valueOf(avg) + " (Not in Normal Range)").setTicker("New Message Alert!").setSmallIcon(R.mipmap.ic_launcher).setSound(alarmSound).setAutoCancel(true).setContentIntent(pendingIntent1).build();
+                NotificationManager notificationManager1 = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                notificationManager1.notify(1, notification1);
+            } else {
+
+            }
         }
     }
+
+
+    private Double getAvg(Context context) {
+        PulseData pd = new PulseData(context);
+        pd.open();
+        Double avg = pd.getAvg();
+        pd.close();
+        return avg;
+    }
+
 
 }
