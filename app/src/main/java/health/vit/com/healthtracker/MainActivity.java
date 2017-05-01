@@ -1,5 +1,6 @@
 package health.vit.com.healthtracker;
 
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -8,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -81,8 +83,26 @@ public class MainActivity extends AppCompatActivity
                 }
             }
         });*/
+
+        startCountAnimation();
     }
 
+    private void startCountAnimation() {
+        PulseData pd = new PulseData(MainActivity.this);
+        pd.open();
+        final int avg = (int) Math.floor(pd.getAvg());
+        Log.i("anim", avg + "d");
+        ValueAnimator animator = ValueAnimator.ofInt(0, avg);
+        animator.setDuration(500);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            public void onAnimationUpdate(ValueAnimator animation) {
+                ((TextView) findViewById(R.id.tv_heart_rate_avg)).setText(animation.getAnimatedValue().toString());
+            }
+        });
+        animator.setRepeatCount(2);
+        animator.setRepeatMode(ValueAnimator.REVERSE);
+        animator.start();
+    }
 
     private void downloadProfilePic(String url) {
 
