@@ -124,7 +124,7 @@ public class PulseData {
         List<Map<String, Integer>> list = new ArrayList<>();
 
         Cursor c;
-        c = database.rawQuery("SELECT * FROM " + DATABASE_TABLE +  " ORDER BY " + KEY_ROWID + " DESC LIMIT 4;" , null);
+        c = database.rawQuery("SELECT * FROM " + DATABASE_TABLE +  " ORDER BY " + KEY_ROWID + " DESC LIMIT 50;" , null);
 
         String result = "";
         int iRow = c.getColumnIndex(KEY_ROWID);
