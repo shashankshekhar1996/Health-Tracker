@@ -11,10 +11,11 @@
         android:background="@android:color/holo_orange_dark"
         android:gravity="center"
         android:padding="10dp"
-        android:text="Contact Me ; )"
+        android:text="Contact"
         android:textColor="@android:color/white"
-        android:textSize="30dp"
-        android:textStyle="bold" />
+        android:textSize="26dp"
+        android:textStyle="normal"/>
+
 
     <TableLayout
         android:id="@+id/tl_1"
@@ -29,12 +30,14 @@
             android:layout_marginTop="20dp">
 
             <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:paddingLeft="32dp"
-                android:src="@drawable/ic_face"
-                android:tint="@android:color/holo_green_light" />
+                android:src="@drawable/ic_doctor"
+                />
 
             <TextView
                 android:id="@+id/tv_doctor_name"

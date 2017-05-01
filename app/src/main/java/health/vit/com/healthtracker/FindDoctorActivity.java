@@ -156,6 +156,10 @@ public class FindDoctorActivity extends AppCompatActivity implements SearchView.
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.i("ERROR", error.getMessage());
+                adapter_doctors.notifyDataSetChanged();
+                progressBar.setVisibility(View.GONE);
+                Toast.makeText(FindDoctorActivity.this, "No doctors found matching this category.", Toast.LENGTH_SHORT).show();
+                doctors_recyclerview.setVisibility(View.VISIBLE);
             }
         });
         requestQueue.add(request);

@@ -12,5 +12,6 @@ public class Constants {
     public static final String PREFS_CHANGE_ACCOUNT = "prefs_change_account";
     public static final String PREFS_DISCONNECT_ACCOUNT = "prefs_disconnect_account";
     public static final String PREFS_EMERGENCY_CONTACT = "prefs_emergency_contact";
+    public static final String PREFS_GET_NOTIFICATIONS = "prefs_get_notifications";
     public static final String MAPS_API_KEY = "AIzaSyCpM2W2hVW8TyNXR5sqVOU2jYQFh0xM6_w";
 }

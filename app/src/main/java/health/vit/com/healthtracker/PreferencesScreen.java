@@ -38,6 +38,7 @@ public class PreferencesScreen extends PreferenceActivity {
     SharedPreferences getPrefs;
     SharedPreferences.Editor editor;
 
+    private String getNotif = "notifkey";
     private String Phone = "phoneKey";
     private String Name = "nameKey";
     private String already_added = null;
@@ -53,6 +54,21 @@ public class PreferencesScreen extends PreferenceActivity {
 
 
         editor = getPrefs.edit();
+
+        /** Get-Notifications */
+        Preference prefs_get_notifs = findPreference(Constants.PREFS_GET_NOTIFICATIONS);
+        prefs_get_notifs.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if ((Boolean) newValue) {
+                    App.getInstance().startNotifications();
+                } else {
+                    App.getInstance().stopNotifications();
+                }
+                return true;
+            }
+        });
+
 
         /** Set User email address in prefs */
         Preference prefs_connected_account = findPreference(Constants.PREFS_CONNECTED_ACCOUNT);
