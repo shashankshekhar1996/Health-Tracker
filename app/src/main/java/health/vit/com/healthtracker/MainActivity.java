@@ -1,5 +1,6 @@
 package health.vit.com.healthtracker;
 
+import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +20,11 @@ import android.widget.TextView;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Map;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity
@@ -26,6 +32,7 @@ public class MainActivity extends AppCompatActivity
 
     private CircleImageView iv_profile_pic;
     private TextView tv_profile_name, tv_profile_email;
+    private TextView tv_heart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +79,8 @@ public class MainActivity extends AppCompatActivity
         tv_profile_name.setText(App.getInstance().getUSERNAME());
         downloadProfilePic(App.getInstance().getPROFILE_PIC_URL());
 
+        tv_heart = (TextView) findViewById(R.id.tv_heart_rate_avg);
+
         /*final LottieAnimationView heart = (LottieAnimationView) findViewById(R.id.animation_view);
         heart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,15 +101,70 @@ public class MainActivity extends AppCompatActivity
         pd.open();
         final int avg = (int) Math.floor(pd.getAvg());
         Log.i("anim", avg + "d");
-        ValueAnimator animator = ValueAnimator.ofInt(0, avg);
-        animator.setDuration(500);
+        Map<String, String> mapList = pd.getMinMaxData();
+        final int min = Integer.valueOf((mapList.get("minRate")));
+        final int max = Integer.valueOf((mapList.get("maxRate")));
+        String timeMin = mapList.get("minTime");
+        String timeMax = mapList.get("maxTime");
+        Timestamp ts_min = Timestamp.valueOf(timeMin);
+        Timestamp ts_max = Timestamp.valueOf(timeMax);
+        Date dateMin = new Date(ts_min.getTime());
+        Date dateMax = new Date(ts_max.getTime());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM");
+        final String formattedDateMin = sdf.format(dateMin);
+        final String formattedDateMax = sdf.format(dateMax);
+        final ValueAnimator animator = ValueAnimator.ofInt(0, avg);
+        animator.setDuration(1000);
+        animator.setStartDelay(200);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             public void onAnimationUpdate(ValueAnimator animation) {
-                ((TextView) findViewById(R.id.tv_heart_rate_avg)).setText(animation.getAnimatedValue().toString());
+                tv_heart.setText(animation.getAnimatedValue().toString());
             }
         });
-        animator.setRepeatCount(2);
-        animator.setRepeatMode(ValueAnimator.REVERSE);
+        animator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                tv_heart.animate().alpha(1.0f).setDuration(500);
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                ValueAnimator minValueAnimator = ValueAnimator.ofInt(0, min);
+                minValueAnimator.setDuration(1000);
+                minValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        ((TextView) findViewById(R.id.tv_min)).setText(animation.getAnimatedValue().toString());
+                        TextView tv_min = (TextView) findViewById(R.id.tv_time_min);
+                        tv_min.setText(formattedDateMin);
+                        tv_min.animate().alpha(1.0f).setDuration(500);
+                    }
+                });
+                ValueAnimator maxValueAnimator = ValueAnimator.ofInt(min, max);
+                maxValueAnimator.setDuration(1000);
+                maxValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        ((TextView) findViewById(R.id.tv_max)).setText(animation.getAnimatedValue().toString());
+                        TextView tv_max = (TextView) findViewById(R.id.tv_time_max);
+                        tv_max.setText(formattedDateMax);
+                        tv_max.animate().alpha(1.0f).setDuration(500);
+                    }
+                });
+                minValueAnimator.setStartDelay(200);
+                maxValueAnimator.setStartDelay(200);
+                minValueAnimator.start();
+                maxValueAnimator.start();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
         animator.start();
     }
 
@@ -150,7 +214,11 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_manual) {
+            startActivity(new Intent(MainActivity.this, PulseDataFetch.class));
+            return true;
+        } else if (id == R.id.action_record_data) {
+            startActivity(new Intent(MainActivity.this, DeviceList.class));
             return true;
         }
 
@@ -192,11 +260,7 @@ public class MainActivity extends AppCompatActivity
             startActivity(new Intent(MainActivity.this, PreferencesScreen.class));
         } //else if (id == R.id.nav_share) {
 
-        //}
-            else if (id == R.id.nav_send) {
-
-            startActivity(new Intent(MainActivity.this, PulseDataFetch.class));
-        }
+        //
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

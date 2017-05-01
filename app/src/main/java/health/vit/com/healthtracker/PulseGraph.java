@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -19,7 +17,6 @@ import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.AxisBase;
-import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -32,19 +29,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import static android.R.attr.data;
-import static android.os.Build.VERSION_CODES.M;
-import static health.vit.com.healthtracker.R.id.map;
-import static health.vit.com.healthtracker.R.id.msg;
 
 public class PulseGraph extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
-    private BarChart barChart;
    // String[] quarters;
     ArrayList<String> quarters;
+    private BarChart barChart;
     private TextView textView;
     private TextView msg;
     private String from;

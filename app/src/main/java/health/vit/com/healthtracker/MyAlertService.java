@@ -29,16 +29,14 @@ public class MyAlertService extends Service {
     }
 
     @Override
-    public void onCreate()
-    {
+    public void onCreate() {
         // TODO Auto-generated method stub
         super.onCreate();
     }
 
     @SuppressWarnings("static-access")
     @Override
-    public void onStart(Intent intent, int startId)
-    {
+    public void onStart(Intent intent, int startId) {
         super.onStart(intent, startId);
 
         //Random generate
@@ -74,9 +72,8 @@ public class MyAlertService extends Service {
         startForeground(0,notificationBuilder.build());*/
 
 
-
         //Intent notificationIntent = new Intent(this, HealthTips.class);
-        Log.i("NOTIFY","NOTIFIED");
+        Log.i("NOTIFY", "NOTIFIED");
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
         stackBuilder.addParentStack(HealthTips.class);
         stackBuilder.addNextIntent(notificationIntent);
@@ -89,16 +86,7 @@ public class MyAlertService extends Service {
         //builder.setSound(alarmSound);
 
 
-
-
-
-        Notification notification = builder.setContentTitle(healthTipsHeading[number])
-                .setContentText(healthTipsPara[number])
-                .setTicker("New Message Alert!")
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setSound(alarmSound)
-                .setAutoCancel(true)
-                .setContentIntent(pendingIntent).build();
+        Notification notification = builder.setContentTitle(healthTipsHeading[number]).setContentText(healthTipsPara[number]).setTicker("New Message Alert!").setSmallIcon(R.mipmap.ic_launcher).setSound(alarmSound).setAutoCancel(true).setContentIntent(pendingIntent).build();
 
         // notification.flags = Notification.FLAG_ONGOING_EVENT | Notification.FLAG_NO_CLEAR;
 
@@ -109,8 +97,7 @@ public class MyAlertService extends Service {
     }
 
     @Override
-    public void onDestroy()
-    {
+    public void onDestroy() {
         // TODO Auto-generated method stub
         super.onDestroy();
     }

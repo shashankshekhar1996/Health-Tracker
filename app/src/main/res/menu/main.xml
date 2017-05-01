@@ -2,8 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_record_data"
+        android:icon="@drawable/ic_doctor_stethoscope"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:title="@string/action_record_data"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/action_manual"
+        android:orderInCategory="100"
+        android:title="@string/action_manual"
+        app:showAsAction="never"/>
 </menu>

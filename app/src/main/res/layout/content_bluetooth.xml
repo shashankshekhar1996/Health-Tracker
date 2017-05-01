@@ -38,52 +38,51 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="260dp"
-        android:textColor="#000"
         android:text="Heart Rate = ????"
-        android:textStyle="bold"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000"
+        android:textStyle="bold"/>
 
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="44dp"
-        android:src="@drawable/ic_heart_red"
-        android:id="@+id/imageView"
         android:layout_marginTop="100dp"
-        android:layout_centerHorizontal="true" />
+        android:src="@drawable/ic_heart_red"/>
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="60"
-        android:id="@+id/linearLayout"
+        android:layout_below="@+id/sensorView0"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginTop="19dp"
-        android:layout_below="@+id/sensorView0"
-        android:layout_centerHorizontal="true">
+        android:weightSum="60">
 
         <Button
-            android:text="Start"
+            android:id="@+id/startBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/startBtn"
             android:layout_weight="28"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/button_back"
+            android:text="Start"
             android:textColor="#fff"
             />
 
 
-
         <Button
-            android:text="Stop"
+            android:id="@+id/stopBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/stopBtn"
-            android:layout_weight="25"
             android:layout_marginLeft="20dp"
+            android:layout_weight="25"
             android:background="@drawable/button_back"
+            android:text="Stop"
             android:textColor="#fff"
             />
 

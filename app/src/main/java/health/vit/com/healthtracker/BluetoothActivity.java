@@ -1,14 +1,11 @@
 package health.vit.com.healthtracker;
 
-import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -24,25 +21,20 @@ import java.io.OutputStream;
 import java.sql.Timestamp;
 import java.util.UUID;
 
-import android.os.Handler;
-
-public class BluetoothActivity extends AppCompatActivity  implements View.OnClickListener{
-
-    Button btnStart, btnStop, btnOn, btnOff;
-    TextView txtArduino, txtString, txtStringLength, sensorView0, sensorView1, sensorView2, sensorView3;
-    Handler bluetoothIn;
-    final int handlerState = 0;                        //used to identify handler message
-    private BluetoothAdapter btAdapter = null;
-    private BluetoothSocket btSocket = null;
-    private StringBuilder recDataString = new StringBuilder();
-
-    private ConnectedThread mConnectedThread;
+public class BluetoothActivity extends AppCompatActivity implements View.OnClickListener {
 
     // SPP UUID service - this should work for most devices
     private static final UUID BTMODULEUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-
     // String for MAC address
     private static String address;
+    final int handlerState = 0;                        //used to identify handler message
+    Button btnStart, btnStop, btnOn, btnOff;
+    TextView txtArduino, txtString, txtStringLength, sensorView0, sensorView1, sensorView2, sensorView3;
+    Handler bluetoothIn;
+    private BluetoothAdapter btAdapter = null;
+    private BluetoothSocket btSocket = null;
+    private StringBuilder recDataString = new StringBuilder();
+    private ConnectedThread mConnectedThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +57,7 @@ public class BluetoothActivity extends AppCompatActivity  implements View.OnClic
         btnStop.setEnabled(false);
     }
 
-    private void startBluetooth(){
+    private void startBluetooth() {
 
         Log.i("TAG","-------hey");
         bluetoothIn = new Handler() {
@@ -141,24 +133,23 @@ public class BluetoothActivity extends AppCompatActivity  implements View.OnClic
         mConnectedThread.write("x");
 
 
-
     }
 
     private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
 
-        return  device.createRfcommSocketToServiceRecord(BTMODULEUUID);
+        return device.createRfcommSocketToServiceRecord(BTMODULEUUID);
         //creates secure outgoing connecetion with BT device using UUID
     }
 
-    private void insertDataIntoDb(String pulseRate){
+    private void insertDataIntoDb(String pulseRate) {
         PulseData pd = new PulseData(BluetoothActivity.this);
 
-        Log.i("TAG","-------heyyaaaaaaaaaa");
+        Log.i("TAG", "-------heyyaaaaaaaaaa");
         pd.open();
         Timestamp t = new Timestamp(System.currentTimeMillis());
         String now = String.valueOf(t);
         pd.createEntry(pulseRate, now);
-        Log.i("TAG","NNNNNNNOOOOOOOOOWWWWWWW------" + now);
+        Log.i("TAG", "NNNNNNNOOOOOOOOOWWWWWWW------" + now);
         pd.close();
     }
 
@@ -179,7 +170,7 @@ public class BluetoothActivity extends AppCompatActivity  implements View.OnClic
             btSocket.close();
         } catch (IOException e2) {
             //insert code to deal with this
-        } catch (Exception e){
+        } catch (Exception e) {
 
         }
     }
@@ -208,19 +199,19 @@ public class BluetoothActivity extends AppCompatActivity  implements View.OnClic
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.startBtn){
+        if (v.getId() == R.id.startBtn) {
             btnStart.setEnabled(false);
             btnStop.setEnabled(true);
             startBluetooth();
         }
-        if(v.getId() == R.id.stopBtn){
-            try{
+        if (v.getId() == R.id.stopBtn) {
+            try {
                 btnStop.setEnabled(false);
                 btnStart.setEnabled(true);
                 btSocket.close();
             } catch (IOException e) {
                 e.printStackTrace();
-            } catch (Exception e1){
+            } catch (Exception e1) {
                 e1.printStackTrace();
             }
         }

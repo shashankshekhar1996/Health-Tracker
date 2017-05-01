@@ -16,8 +16,6 @@ import android.util.Log;
 
 import java.util.Random;
 
-import static health.vit.com.healthtracker.R.id.msg;
-
 /**
  * Created by shashankshekhar on 24/01/17.
  */
@@ -107,7 +105,7 @@ public class MyAlarmService extends Service {
         //////
         Double avg = getAvg();
         Log.i("NOTIFY", String.valueOf(avg));
-        if(avg < 60 || avg > 100){
+        if (avg < 60 || avg > 100) {
             Log.i("NOTIFYing", String.valueOf(avg));
             TaskStackBuilder stackBuilder1 = TaskStackBuilder.create(this);
             stackBuilder1.addParentStack(MainActivity.class);
@@ -120,16 +118,10 @@ public class MyAlarmService extends Service {
 
             //builder.setSound(alarmSound);
 
-            Notification notification1 = builder.setContentTitle("Health Risk Detected! Consult Doctor!")
-                    .setContentText("Heart Rate : " + String.valueOf(avg) + " (Not in Normal Range)")
-                    .setTicker("New Message Alert!")
-                    .setSmallIcon(R.mipmap.ic_launcher)
-                    .setSound(alarmSound)
-                    .setAutoCancel(true)
-                    .setContentIntent(pendingIntent1).build();
+            Notification notification1 = builder.setContentTitle("Health Risk Detected! Consult Doctor!").setContentText("Heart Rate : " + String.valueOf(avg) + " (Not in Normal Range)").setTicker("New Message Alert!").setSmallIcon(R.mipmap.ic_launcher).setSound(alarmSound).setAutoCancel(true).setContentIntent(pendingIntent1).build();
             NotificationManager notificationManager1 = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager1.notify(0, notification1);
-        }else{
+        } else {
 
         }
         /////
@@ -147,7 +139,7 @@ public class MyAlarmService extends Service {
         super.onDestroy();
     }
 
-    private Double getAvg(){
+    private Double getAvg() {
         PulseData pd = new PulseData(MyAlarmService.this);
         pd.open();
         Double avg = pd.getAvg();
