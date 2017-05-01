@@ -8,16 +8,23 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.hardware.camera2.CaptureResult;
 import android.renderscript.Script;
+import android.util.ArrayMap;
+import android.util.Log;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import static android.R.attr.order;
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
+import static android.os.Build.VERSION_CODES.M;
+import static health.vit.com.healthtracker.R.id.map;
 
 /**
  * Created by shashankshekhar on 22/01/17.
@@ -112,33 +119,127 @@ public class PulseData {
         return result;
     }
 
+
+    public List<Map<String, Integer>> getMinMaxData(){
+        List<Map<String, Integer>> list = new ArrayList<>();
+
+        Cursor c;
+        c = database.rawQuery("SELECT * FROM " + DATABASE_TABLE +  " ORDER BY " + KEY_ROWID + " DESC LIMIT 4;" , null);
+
+        String result = "";
+        int iRow = c.getColumnIndex(KEY_ROWID);
+        int iPulserate = c.getColumnIndex(KEY_PULSERATE);
+        int iTime = c.getColumnIndex(KEY_TIMESTAMP);
+
+        Integer minRate=0, maxRate=0;
+        String minTime="", maxTime="";
+
+        if(c.moveToFirst()){
+            minRate = c.getInt(iPulserate);
+            maxRate = c.getInt(iPulserate);
+            minTime = c.getString(iTime);
+            maxTime = c.getString(iTime);
+        }
+
+
+        for(c.moveToFirst(); !c.isAfterLast(); c.moveToNext()){
+
+            Integer pulseRate = c.getInt(iPulserate);
+
+            if(pulseRate > maxRate){
+                maxRate = pulseRate;
+                maxTime = c.getString(iTime);
+
+            }
+
+            if(pulseRate < minRate){
+                minRate = pulseRate;
+                minTime = c.getString(iTime);
+            }
+
+        }
+
+
+
+
+        Map<String, Integer> minMap = new ArrayMap<>();
+        minMap.put(minTime, minRate);
+        list.add(minMap);
+
+        Map<String, Integer> maxMap = new ArrayMap<>();
+        maxMap.put(maxTime, maxRate);
+        list.add(maxMap);
+
+        return list;
+
+    }
+
    // public
+
+//    public Double getAvg(){
+//        Double avg = 0.0;
+//        Cursor c;
+//
+//       // c = database.rawQuery("SELECT SUM(" + KEY_PULSERATE + ") as Total FROM " + DATABASE_TABLE + ";",null);
+//        c = database.rawQuery("SELECT SUM(" + KEY_PULSERATE + ") as Total, COUNT(*) as TotalCount FROM " + DATABASE_TABLE + ";",null);
+//
+//        //Cursor c1;
+//       // c1 = database.rawQuery("SELECT * FROM " + DATABASE_TABLE + ";",null);
+//
+//        String result = "";
+//        int iRow = c.getColumnIndex("Total");
+//        int itc = c.getColumnIndex("TotalCount");
+//
+//        int y = c.getCount();
+//       // int y1 = c1.getCount();
+//        if(c.moveToFirst()) {
+//            if (c.getCount() < 50 && c.getCount() > 0) {
+//                //avg = Double.valueOf(Double.valueOf(c.getInt(0)) / c1.getCount());
+//                avg = Double.valueOf(Double.valueOf(c.getInt(iRow)) / c.getInt(itc));
+//            } else if (c.getCount() >= 50) {
+//                avg = Double.valueOf(Double.valueOf(c.getInt(iRow)) / 50);
+//            } else {
+//                avg = 0.0;
+//            }
+//        }
+//
+//        return avg;
+//    }
 
     public Double getAvg(){
         Double avg = 0.0;
-        Cursor c;
+        Cursor c,c1;
 
-       // c = database.rawQuery("SELECT SUM(" + KEY_PULSERATE + ") as Total FROM " + DATABASE_TABLE + ";",null);
-        c = database.rawQuery("SELECT SUM(" + KEY_PULSERATE + ") as Total, COUNT(*) as TotalCount FROM " + DATABASE_TABLE + ";",null);
+        try
+        {
+            c = database.rawQuery("SELECT * FROM " + DATABASE_TABLE + " ORDER BY " + KEY_ROWID + " DESC LIMIT 50;",null);
+            c1 = database.rawQuery("SELECT COUNT(" + KEY_ROWID + ") as count FROM " + DATABASE_TABLE, null);
 
-        //Cursor c1;
-       // c1 = database.rawQuery("SELECT * FROM " + DATABASE_TABLE + ";",null);
+            String result = "";
+            Integer count = 0;
+            int iRow = c.getColumnIndex(KEY_PULSERATE);
+            int itc = c1.getColumnIndex("count");
+            if(c1.moveToFirst()) {
+                count = c1.getInt(itc);
+            }
+            Integer sum = 0;
 
-        String result = "";
-        int iRow = c.getColumnIndex("Total");
-        int itc = c.getColumnIndex("TotalCount");
 
-        int y = c.getCount();
-       // int y1 = c1.getCount();
-        if(c.moveToFirst()) {
-            if (c.getCount() < 50 && c.getCount() > 0) {
-                //avg = Double.valueOf(Double.valueOf(c.getInt(0)) / c1.getCount());
-                avg = Double.valueOf(Double.valueOf(c.getInt(iRow)) / c.getInt(itc));
-            } else if (c.getCount() >= 50) {
-                avg = Double.valueOf(Double.valueOf(c.getInt(iRow)) / 50);
-            } else {
+            for(c.moveToFirst(); !c.isAfterLast(); c.moveToNext()){
+                sum = sum + c.getInt(iRow);
+            }
+
+            if(count < 50 && count > 0){
+                avg = Double.valueOf(sum)/count;
+            }else if(count == 50){
+                avg = Double.valueOf(sum)/50;
+            }else{
                 avg = 0.0;
             }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            Log.i("Error", e.toString());
         }
 
         return avg;
