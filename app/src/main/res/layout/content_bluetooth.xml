@@ -39,7 +39,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="260dp"
         android:textColor="#000"
-        android:text="Heart Rate = 72 BPM"
+        android:text="Heart Rate = ????"
         android:textStyle="bold"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 

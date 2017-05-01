@@ -32,10 +32,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import static android.R.attr.data;
 import static android.os.Build.VERSION_CODES.M;
+import static health.vit.com.healthtracker.R.id.map;
 import static health.vit.com.healthtracker.R.id.msg;
 
 public class PulseGraph extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
@@ -97,6 +99,7 @@ public class PulseGraph extends AppCompatActivity implements AdapterView.OnItemS
         PulseData pd = new PulseData(PulseGraph.this);
         pd.open();
         Double avg = pd.getAvg();
+        //List<Map<String, Integer>> map = pd.getMinMaxData();
         pd.close();
         String avgText = String.valueOf(avg);
         String average = "Your Average Heart rate for last few readings is " + avgText + ".";
