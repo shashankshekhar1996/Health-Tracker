@@ -14,7 +14,7 @@
 
     <!-- Project-specific Strings like URLs, Names ,etc. -->
 
-    <string name="filter_doctor_url">http://socketchat.tk/sendjson.php/?</string>
+    <string name="filter_doctor_url">http://steadfast-buy.000webhostapp.com/sendjson.php/?</string>
     <string name="send_sms_doctor">Hello Doctor, I want to meet you regarding my health issues.</string>
     <string name="default_email">abc@gmail.com</string>
     <string name="default_username">Username</string>

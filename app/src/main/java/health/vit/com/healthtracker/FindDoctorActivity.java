@@ -92,7 +92,7 @@ public class FindDoctorActivity extends AppCompatActivity implements SearchView.
     private void callApi() {
         doctors_list.clear();
         RequestQueue requestQueue = Volley.newRequestQueue(FindDoctorActivity.this);
-        String filter_doctors_url = getString(R.string.filter_doctor_url);
+        String filter_doctors_url = getString(R.string.filter_doctor_url) + "city&name";
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, filter_doctors_url, null, new Response.Listener<JSONObject>() {
             @Override
@@ -213,8 +213,10 @@ public class FindDoctorActivity extends AppCompatActivity implements SearchView.
             searchView.setQuery("", false);
         }
         if (filter_choice == 0) {
+            query += "&name";
             filterBy("city", query);
         } else if (filter_choice == 1) {
+            query += "&city";
             filterBy("name", query);
         } else {
             Toast.makeText(this, "Please choose a category", Toast.LENGTH_LONG).show();
