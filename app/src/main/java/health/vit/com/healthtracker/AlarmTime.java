@@ -89,7 +89,7 @@ public class AlarmTime extends BroadcastReceiver{
             Intent notificationIntent1 = new Intent(context, FindDoctorActivity.class);
             Double avg = getAvg(context);
             Log.i("NOTIFY", String.valueOf(avg));
-            if (avg < 60 || avg > 100) {
+            if (avg < 50 || avg > 120) {
                 Log.i("NOTIFYing", String.valueOf(avg));
                 TaskStackBuilder stackBuilder1 = TaskStackBuilder.create(context);
                 stackBuilder1.addParentStack(MainActivity.class);

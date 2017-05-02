@@ -81,7 +81,7 @@ public class BluetoothActivity extends AppCompatActivity implements View.OnClick
                         {
                             //String sensor0 = recDataString.substring(1, 4);             //get sensor value from string between indices 1-5
                             String sensor0 = recDataString.substring(1, dataLength);
-                            sensorView0.setText(" Heart Rate = " + sensor0 + "BPM");    //update the textviews with sensor values
+                            sensorView0.setText(" Heart Rate = " + sensor0 + " BPM");    //update the textviews with sensor values
                             insertDataIntoDb(sensor0);
                         }
                         recDataString.delete(0, recDataString.length());                    //clear all string data
